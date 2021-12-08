@@ -8,15 +8,3 @@ body {
 ::-webkit-scrollbar {
   display: none;
 }
-
-#app {
-  box-shadow: 0 0 48px 0 rgb(0 0 0 / 20%);
-  background: url('/background.png');
-  background-size: cover;
-  min-height: 100vh;
-  max-width: 500px;
-  margin: 0 auto;
-  position: relative;
-  padding-bottom: 55px;
-  padding-top: 55px;
-}

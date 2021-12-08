@@ -3,100 +3,102 @@
   import Counter from './lib/Counter.svelte'
 </script>
 
-<main>
-  <div class="header-wrapper">
-    <header>Wedding</header>
-  </div>
-  <img src={logo} alt="Svelte Logo" />
-  <h1>Hello!</h1>
-
-  <Counter />
-
-  <p>
-    Visit <a href="https://svelte.dev">svelte.dev</a> to learn how to build Svelte
-    apps.
-  </p>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
-
-  <div class="nav-wrapper">
-    <nav>
-      <a href="/lol">Home</a>
-      <a href="/lol">Home</a>
-      <a href="/lol">Home</a>
-      <a href="/lol">Home</a>
-    </nav>
+<main style="background: url('/background.png'); background-size: cover;">
+  <div class="container-mk">
+    <div class="header-wrapper">
+      <header>Wedding</header>
+    </div>
+    <img src={logo} alt="Svelte Logo" />
+    <h1>Hello!</h1>
+  
+    <Counter />
+  
+    <p>
+      Visit <a href="https://svelte.dev">svelte.dev</a> to learn how to build Svelte
+      apps.
+    </p>
+  
+    <p>
+      Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+      the officially supported framework, also powered by Vite!
+    </p>
+    <p>
+      Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+      the officially supported framework, also powered by Vite!
+    </p>
+    <p>
+      Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+      the officially supported framework, also powered by Vite!
+    </p>
+    <p>
+      Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+      the officially supported framework, also powered by Vite!
+    </p>
+    <p>
+      Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+      the officially supported framework, also powered by Vite!
+    </p>
+    <p>
+      Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+      the officially supported framework, also powered by Vite!
+    </p>
+    <p>
+      Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+      the officially supported framework, also powered by Vite!
+    </p>
+    <p>
+      Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+      the officially supported framework, also powered by Vite!
+    </p>
+    <p>
+      Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+      the officially supported framework, also powered by Vite!
+    </p>
+    <p>
+      Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+      the officially supported framework, also powered by Vite!
+    </p>
+    <p>
+      Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+      the officially supported framework, also powered by Vite!
+    </p>
+    <p>
+      Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+      the officially supported framework, also powered by Vite!
+    </p>
+    <p>
+      Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+      the officially supported framework, also powered by Vite!
+    </p>
+    <p>
+      Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+      the officially supported framework, also powered by Vite!
+    </p>
+    <p>
+      Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+      the officially supported framework, also powered by Vite!
+    </p>
+    <p>
+      Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+      the officially supported framework, also powered by Vite!
+    </p>
+    <p>
+      Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+      the officially supported framework, also powered by Vite!
+    </p>
+    <p>
+      Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+      the officially supported framework, also powered by Vite!
+    </p>
+  
+    <div class="nav-wrapper">
+      <nav>
+        <a href="/lol">Home</a>
+        <a href="/lol">Home</a>
+        <a href="/lol">Home</a>
+        <a href="/lol">Home</a>
+      </nav>
+    </div>
   </div>
 </main>
 
@@ -109,7 +111,7 @@
     z-index: 100;
   }
   header {
-    max-width: 500px;
+    max-width: 400px;
     height: 55px;
     display: flex;
     justify-content: center;
@@ -125,7 +127,7 @@
     z-index: 100;
   }
   nav {
-    max-width: 500px;
+    max-width: 400px;
     height: 55px;
     display: flex;
     justify-content: space-around;
@@ -140,10 +142,20 @@
       Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
-  main {
+  .container-mk {
     text-align: center;
     padding: 1em;
     margin: 0 auto;
+  }
+
+  main {
+    box-shadow: 0 0 48px 0 rgb(0 0 0 / 20%);
+    min-height: 100vh;
+    max-width: 400px;
+    margin: 0 auto;
+    position: relative;
+    padding-bottom: 55px;
+    padding-top: 55px;
   }
 
   img {
