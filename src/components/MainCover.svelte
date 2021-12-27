@@ -1,11 +1,21 @@
 <script>
-  import { data as langDataStore } from '../stores/lang'
+  import { data as langDataStore, active as langActiveStore, toggleLanguage } from '../stores/lang'
 </script>
 
 <div class="img-cover" style="background: url('/jumbotron-header.jpeg'); background-size: cover;">
   <div class="img-cover" style="text-align: left; padding: 160px 30px; background-color: rgba(255,255,255,.35)">
-    <p style="white-space: pre-line; font-size: 20px; color: rgb(70 102 120);">{$langDataStore?.cover_text_1 || 'cover_text_1'}</p>
-    <h1 style="white-space: pre-line; line-height: 1.5; font-size: 46px; color: #fff">{$langDataStore?.cover_text_2 || 'cover_text_2'}</h1>
+    <img
+      style="cursor: pointer; position: absolute; top: 30px; right: 30px"
+      src="./{$langActiveStore}.png"
+      alt="flag_{$langActiveStore}"
+      on:click={toggleLanguage}
+    >
+    <p
+      style="white-space: pre-line; font-size: 20px; color: rgb(70 102 120);"
+    >{$langDataStore?.cover_text_1 || 'cover_text_1'}</p>
+    <h1
+      style="white-space: pre-line; line-height: 1.5; font-size: 46px; color: #fff"
+    >{$langDataStore?.cover_text_2 || 'cover_text_2'}</h1>
     <div style="margin-top: 30px;">
       <button class="btn btn-hirzi">{$langDataStore?.cover_button_congrats || 'cover_button_congrats'}</button>
       <button class="btn btn-urfa">{$langDataStore?.cover_button_gift || 'cover_button_gift'}</button>
