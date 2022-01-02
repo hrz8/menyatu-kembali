@@ -647,6 +647,11 @@ supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
+svelte-bootstrap-icons@^1.7.2:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/svelte-bootstrap-icons/-/svelte-bootstrap-icons-1.7.2.tgz#b31bfb2c473d288b0337e10094bd361f9c9bf138"
+  integrity sha512-uoPUXZ/fBuNt5jWrZxSrgEijm3I9/R63YrTPvrZp3d1Bfnl+0yx+w0NqmHFk7a+VYNVIUzBWXCRY8JCjfCwE8A==
+
 svelte-check@^2.2.7:
   version "2.2.10"
   resolved "https://registry.yarnpkg.com/svelte-check/-/svelte-check-2.2.10.tgz#ca2e4fde2d077e703792d8301a643c36375f646c"
@@ -684,10 +689,10 @@ svelte@^3.44.0:
   resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.44.2.tgz#3e69be2598308dfc8354ba584cec54e648a50f7f"
   integrity sha512-jrZhZtmH3ZMweXg1Q15onb8QlWD+a5T5Oca4C1jYvSURp2oD35h4A5TV6t6MEa93K4LlX6BkafZPdQoFjw/ylA==
 
-sveltestrap@^5.6.3:
-  version "5.6.3"
-  resolved "https://registry.yarnpkg.com/sveltestrap/-/sveltestrap-5.6.3.tgz#afb81b00d0b378719988e5339f92254dce41194f"
-  integrity sha512-/geTKJbPmJGzwHFKYC3NkUNDk/GKxrppgdSxcg58w/qcxs0S6RiN4PaQ1tgBKsdSrZDfbHfkFF+dybHAyUlV0A==
+sveltestrap@^5.7.0:
+  version "5.7.0"
+  resolved "https://registry.yarnpkg.com/sveltestrap/-/sveltestrap-5.7.0.tgz#3b27a57a8d17884efced9cef6a26e2d11f444061"
+  integrity sha512-5Ftffz4Xr3tJrc/8KEtkE+byut506ItWJT0FRT/psnk5CElIvbxUZhsnF+z4vefhf5OZxJsu6BJwV4xXrlzZGg==
   dependencies:
     "@popperjs/core" "^2.9.2"
 

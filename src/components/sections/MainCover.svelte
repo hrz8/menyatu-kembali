@@ -15,15 +15,26 @@
       on:click={toggleLanguage}
     >
     <p
-      style="white-space: pre-line; font-size: 20px; color: rgb(70 102 120);"
+      class="locale-text primary-text bold-text"
+      style="font-size: 20px;"
     >{$langDataStore?.cover_text_1 || 'cover_text_1'}</p>
     <h1
-      style="white-space: pre-line; line-height: 1.5; font-size: 46px; color: #fff"
+      class="locale-text bold-text"
+      style="line-height: 1.5; font-size: 46px; color: #fff"
     >{$langDataStore?.cover_text_2 || 'cover_text_2'}</h1>
     <div style="margin-top: 30px;">
-      <button class="btn btn-hirzi">{$langDataStore?.cover_button_congrats || 'cover_button_congrats'}</button>
-      <button class="btn btn-urfa">{$langDataStore?.cover_button_gift || 'cover_button_gift'}</button>
-      <button class="btn btn-urfa mt-3">{$langDataStore?.cover_button_confirm || 'cover_button_confirm'}</button>
+      <button
+        type="button"
+        class="bold-text btn btn-hirzi"
+      >{$langDataStore?.cover_button_congrats || 'cover_button_congrats'}</button>
+      <button
+        type="button"
+        class="bold-text btn btn-urfa"
+      >{$langDataStore?.cover_button_gift || 'cover_button_gift'}</button>
+      <button
+        type="button"
+        class="bold-text btn btn-urfa mt-3"
+      >{$langDataStore?.cover_button_confirm || 'cover_button_confirm'}</button>
     </div>
   </div>
 </div>
