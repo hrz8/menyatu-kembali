@@ -1,5 +1,9 @@
 <script>
-  import { data as langDataStore, active as langActiveStore, toggleLanguage } from '../stores/lang'
+  import {
+    data as langDataStore,
+    active as langActiveStore,
+    toggleLanguage
+  } from '../../stores/lang'
 </script>
 
 <div class="img-cover" style="background: url('/jumbotron-header.jpeg'); background-size: cover;">

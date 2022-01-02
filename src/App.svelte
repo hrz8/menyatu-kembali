@@ -11,7 +11,7 @@
 
   window.onscroll = function() {
     var currentScrollPos = window.pageYOffset;
-    if (currentScrollPos > 200) {
+    if (currentScrollPos > 70) {
       displayHeader = true;
     } else {
       displayHeader = false;

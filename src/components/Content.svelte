@@ -1,8 +1,11 @@
 <script>
-  import MainCover from "./MainCover.svelte"
+  import MainCover from "./sections/MainCover.svelte"
+  import OpeningPhrase from "./sections/OpeningPhrase.svelte"
 </script>
 
 <MainCover />
+
+<OpeningPhrase />
 
 <p>
   Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
