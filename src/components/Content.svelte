@@ -1,85 +1,47 @@
 <script>
   import MainCover from "./sections/MainCover.svelte"
   import OpeningPhrase from "./sections/OpeningPhrase.svelte"
+import Schedule from "./sections/Schedule.svelte"
 </script>
 
 <MainCover />
 
 <OpeningPhrase />
 
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
+<Schedule />
 
+<p>
+  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+  the officially supported framework, also powered by Vite!
+</p>
+<p>
+  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+  the officially supported framework, also powered by Vite!
+</p>
+<p>
+  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+  the officially supported framework, also powered by Vite!
+</p>
+<p>
+  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+  the officially supported framework, also powered by Vite!
+</p>
+<p>
+  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+  the officially supported framework, also powered by Vite!
+</p>
+<p>
+  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+  the officially supported framework, also powered by Vite!
+</p>
+<p>
+  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+  the officially supported framework, also powered by Vite!
+</p>
+<p>
+  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
+  the officially supported framework, also powered by Vite!
+</p>
 
 <style>
   p {
