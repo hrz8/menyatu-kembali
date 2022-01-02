@@ -1,9 +1,13 @@
+<script>
+  import { House, PinMapFill, Watch, Gift } from 'svelte-bootstrap-icons'
+</script>
+
 <div class="nav-wrapper">
   <nav>
-    <a href="/lol">Home</a>
-    <a href="/lol">Home</a>
-    <a href="/lol">Home</a>
-    <a href="/lol">Home</a>
+    <a class="text-decoration-none" href="#home"><House width="24" height="24" /></a>
+    <a class="text-decoration-none" href="#location"><PinMapFill width="24" height="24" /></a>
+    <a class="text-decoration-none" href="#schedule"><Watch width="24" height="24" /></a>
+    <a class="text-decoration-none" href="#gift"><Gift width="24" height="24" /></a>
   </nav>
 </div>
 
@@ -15,7 +19,9 @@
     left: 0;
     z-index: 100;
   }
+
   nav {
+    box-shadow: 0 0 48px 0 rgb(0 0 0 / 20%);
     max-width: 400px;
     height: 55px;
     display: flex;
@@ -24,6 +30,14 @@
     left: 0;
     right: 0;
     margin: 0 auto;
-    background: #ff3e00;
+    background: #ffffff;
+  }
+
+  nav > a {
+    color: rgb(70 102 120) !important;
+  }
+
+  nav > a:hover {
+    color: rgb(36, 51, 59) !important;
   }
 </style>

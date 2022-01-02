@@ -47,27 +47,9 @@
     border-bottom-right-radius: 110% 140px;
   }
 
-  .btn-hirzi {
-    color: #fff;
-    background-color: #ffc387;
-    border-color: #ffc387;
-  }
-
-  .btn-hirzi:hover {
-    color: #fff;
-    background-color: #f0b77e;
-    border-color: #f0b77e;
-  }
-
-  .btn-urfa {
-    color: #fff;
-    background-color: #96b8c8;
-    border-color: #96b8c8;
-  }
-
-  .btn-urfa:hover {
-    color: #fff;
-    background-color: #80a6b8;
-    border-color: #80a6b8;
+  @media (max-width: 300px) {
+    .img-cover {
+      height: 800px;
+    }
   }
 </style>

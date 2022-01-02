@@ -5,8 +5,8 @@
 
 <div class="schedule" style="text-align: left; background: url('/background-cropped.jpeg'); background-size: cover;">
   <p
-    class="locale-text bold-text"
-    style="font-size: 20px; color: rgb(70 102 120);"
+    class="locale-text bold-text primary-text"
+    style="font-size: 20px;"
   >{$langDataStore?.section_schedule_note || 'section_schedule_note'}</p>
 
   <div class="p-3">

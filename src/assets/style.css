@@ -9,7 +9,7 @@ body {
 }
 
 .primary-text {
-  color: rgb(70 102 120);
+  color: rgb(70 102 120) !important;
 }
 
 .primary-box {
@@ -22,6 +22,30 @@ body {
 
 .bold-text {
   font-weight: 600 !important;
+}
+
+.btn-hirzi {
+  color: #fff !important;
+  background-color: #ffc387 !important;
+  border-color: #ffc387 !important;
+}
+
+.btn-hirzi:hover {
+  color: #fff !important;
+  background-color: #f0b77e !important;
+  border-color: #f0b77e !important;
+}
+
+.btn-urfa {
+  color: #fff !important;
+  background-color: #96b8c8 !important;
+  border-color: #96b8c8 !important;
+}
+
+.btn-urfa:hover {
+  color: #fff !important;
+  background-color: #80a6b8 !important;
+  border-color: #80a6b8 !important;
 }
 
 ::-webkit-scrollbar {

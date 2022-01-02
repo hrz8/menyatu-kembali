@@ -1,58 +1,22 @@
 <script>
+  import GiftForm from "./sections/GiftForm.svelte"
   import MainCover from "./sections/MainCover.svelte"
   import OpeningPhrase from "./sections/OpeningPhrase.svelte"
-import Schedule from "./sections/Schedule.svelte"
+  import Schedule from "./sections/Schedule.svelte"
 </script>
 
-<MainCover />
+<div id="home">
+  <MainCover />
+</div>
 
-<OpeningPhrase />
+<div id="location">
+  <OpeningPhrase />
+</div>
 
-<Schedule />
+<div id="schedule">
+  <Schedule />
+</div>
 
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-<p>
-  Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-  the officially supported framework, also powered by Vite!
-</p>
-
-<style>
-  p {
-    max-width: 14rem;
-    margin: 1rem auto;
-    line-height: 1.35;
-  }
-
-  @media (min-width: 480px) {
-    p {
-      max-width: none;
-    }
-  }
-</style>
+<div id="gift">
+  <GiftForm />
+</div>
