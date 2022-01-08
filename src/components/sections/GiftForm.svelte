@@ -1,5 +1,6 @@
 <script>
   import { data as langDataStore } from '../../stores/lang'
+import WishListModal from '../WishListModal.svelte';
 </script>
 
 <div style="padding: 35px; text-align: left;">
@@ -22,6 +23,8 @@
     type="button"
     class="bold-text btn btn-urfa mb-5"
     style="display: block; width: 180px"
+    data-bs-toggle="modal"
+    data-bs-target="#giftModal"
   >{$langDataStore?.section_gift_send_gift || 'section_gift_send_gift'}</button>
 
   <p
@@ -41,3 +44,5 @@
     </div>
   </form>
 </div>
+
+<WishListModal />

@@ -4,6 +4,7 @@
     active as langActiveStore,
     toggleLanguage
   } from '../../stores/lang'
+import WishListModal from '../WishListModal.svelte';
 </script>
 
 <div class="img-cover" style="background: url('/jumbotron-header.jpeg'); background-size: cover;">
@@ -30,6 +31,8 @@
       <button
         type="button"
         class="bold-text btn btn-urfa"
+        data-bs-toggle="modal"
+        data-bs-target="#giftModal"
       >{$langDataStore?.cover_button_gift || 'cover_button_gift'}</button>
       <button
         type="button"
@@ -38,6 +41,8 @@
     </div>
   </div>
 </div>
+
+<WishListModal />
 
 <style>
   .img-cover {
