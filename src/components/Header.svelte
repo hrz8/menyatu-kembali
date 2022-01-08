@@ -1,10 +1,26 @@
 <script>
-  import { active as langActiveStore, toggleLanguage } from '../stores/lang'
+  import { ArrowRepeat } from 'svelte-bootstrap-icons'
+  import {
+    active as langActiveStore,
+    toggleLanguage,
+    fetchData as fetchDataLang
+  } from '../stores/lang'
+  import { isDebugValid } from '../stores/params';
+
   export let isDisplay = false;
 </script>
 
 <div style="display: {isDisplay ? 'block' : 'none'}" class="header-wrapper">
   <header>
+    {#if $isDebugValid}
+      <button class="btn" on:click={async () => {
+        try {
+          await fetchDataLang()
+        } catch (error) {
+          // do nothing
+        }
+      }}><ArrowRepeat width="18" height="18" /></button>
+    {/if}
     <img
       style="cursor: pointer;"
       src="./{$langActiveStore}.png"

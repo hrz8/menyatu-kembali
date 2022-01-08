@@ -21,10 +21,19 @@ export const toggleLanguage = async () => {
     localStorage.setItem('l', 'id')
     return 'id'
   })
-  await fetchData()
+  await initialFetchData()
 }
 
 export const fetchData = async () => {
+  const activeLanguage = get(active)
+  const url = `https://opensheet.vercel.app/${sheetId}/${activeLanguage}`
+  const response = await fetch(url)
+  const result = (await response.json())[0]
+  data.set(result || null)
+  localStorage.setItem(`l_${activeLanguage}`, JSON.stringify(result))
+}
+
+export const initialFetchData = async () => {
   const activeLanguage = get(active)
   const result = localStorage.getItem(`l_${activeLanguage}`)
   if (result) {
@@ -33,11 +42,7 @@ export const fetchData = async () => {
   }
   try {
     console.info('fetching locale for the first time...')
-    const url = `https://opensheet.vercel.app/${sheetId}/${activeLanguage}`
-    const response = await fetch(url)
-    const result = (await response.json())[0]
-    data.set(result || null)
-    localStorage.setItem(`l_${activeLanguage}`, JSON.stringify(result))
+    await fetchData();
   } catch (error) {
     console.error(error)
     data.set(null)

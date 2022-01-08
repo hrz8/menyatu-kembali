@@ -1,6 +1,6 @@
 <script>
   import { data as langDataStore } from '../../stores/lang'
-import WishListModal from '../WishListModal.svelte';
+  import WishListModal from '../WishListModal.svelte';
 </script>
 
 <div style="padding: 35px; text-align: left;">
