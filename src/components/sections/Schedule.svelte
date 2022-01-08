@@ -1,6 +1,7 @@
 <script>
   import { data as langDataStore } from '../../stores/lang'
   import { ArrowRight } from 'svelte-bootstrap-icons'
+  import { isGroupValid } from '../../stores/params'
 </script>
 
 <div class="schedule" style="text-align: left; background: url('/background-cropped.jpeg'); background-size: cover;">
@@ -9,43 +10,53 @@
     style="font-size: 20px;"
   >{$langDataStore?.section_schedule_note || 'section_schedule_note'}</p>
 
-  <div class="p-3">
-    <div class="card-mk mb-4" style="background-color: rgb(199, 216, 225); border: 1px solid rgb(165 208 231);">
-      <!-- akad -->
-      <p
-        class="locale-text bold-text primary-text mb-2"
-      >{$langDataStore?.section_schedule_engagement || 'section_schedule_engagement'}</p>
-      <p
-        class="locale-text primary-text"
-      >{$langDataStore?.place_only || 'place_only'}</p>
-      <button
-        class="px-0 btn btn-confirm mb-0"
-      >{$langDataStore?.cover_button_confirm || 'cover_button_confirm'} <ArrowRight /></button>
+  <div class="card-mk mb-4" style="background-color: rgb(199, 216, 225); border: 1px solid rgb(165 208 231);">
+    <!-- akad -->
+    <p
+      class="locale-text bold-text primary-text mb-2"
+    >{$langDataStore?.section_schedule_engagement || 'section_schedule_engagement'}</p>
+    <p
+      class="locale-text primary-text"
+    >{$langDataStore?.place_only || 'place_only'}</p>
+    <button
+      class="px-0 btn btn-confirm mb-0"
+    >{$langDataStore?.cover_button_confirm || 'cover_button_confirm'} <ArrowRight /></button>
+  </div>
+  <div class="card-mk mb-4" style="background-color: rgb(255 197 156); border: 1px solid rgb(255, 149, 39);">
+    <!-- resepsi 1 -->
+    {#if $isGroupValid[0] === 1}
+    <div class="suggestion-snippet">
+      <div class="suggestion-text">{$langDataStore?.session_suggestion || 'session_suggestion'}</div>
     </div>
-    <div class="card-mk mb-4" style="background-color: rgb(255 197 156); border: 1px solid rgb(255, 149, 39);">
-      <!-- resepsi 1 -->
-      <p
-        class="locale-text bold-text primary-text mb-2"
-      >{$langDataStore?.section_schedule_party_1 || 'section_schedule_party_1'}</p>
-      <p
-        class="locale-text primary-text"
-      >{$langDataStore?.place_only || 'place_only'}</p>
-      <button
-        class="px-0 btn btn-confirm mb-0"
-      >{$langDataStore?.cover_button_confirm || 'cover_button_confirm'} <ArrowRight /></button>
+    {/if}
+    <p
+      class="locale-text bold-text primary-text mb-2"
+    >{$langDataStore?.section_schedule_party_1 || 'section_schedule_party_1'}</p>
+    <p
+      class="locale-text primary-text"
+    >{$langDataStore?.place_only || 'place_only'}</p>
+    <button
+      class="px-0 btn btn-confirm mb-0"
+      disabled={$isGroupValid[0] !== 1}
+    >{$langDataStore?.cover_button_confirm || 'cover_button_confirm'} <ArrowRight /></button>
+  </div>
+  <div class="card-mk" style="background-color: rgb(158 190 207); border: 1px solid rgb(86 166 209);">
+    <!-- resepsi 2 -->
+    {#if $isGroupValid[0] === 2}
+    <div class="suggestion-snippet">
+      <div class="suggestion-text">{$langDataStore?.session_suggestion || 'session_suggestion'}</div>
     </div>
-    <div class="card-mk" style="background-color: rgb(158 190 207); border: 1px solid rgb(86 166 209);">
-      <!-- resepsi 2 -->
-      <p
-        class="locale-text bold-text primary-text mb-2"
-      >{$langDataStore?.section_schedule_party_2 || 'section_schedule_party_2'}</p>
-      <p
-        class="locale-text primary-text"
-      >{$langDataStore?.place_only || 'place_only'}</p>
-      <button
-        class="px-0 btn btn-confirm mb-0"
+    {/if}
+    <p
+      class="locale-text bold-text primary-text mb-2"
+    >{$langDataStore?.section_schedule_party_2 || 'section_schedule_party_2'}</p>
+    <p
+      class="locale-text primary-text"
+    >{$langDataStore?.place_only || 'place_only'}</p>
+    <button
+      class="px-0 btn btn-confirm mb-0"
+      disabled={$isGroupValid[0] !== 2}
       >{$langDataStore?.cover_button_confirm || 'cover_button_confirm'} <ArrowRight /></button>
-    </div>
   </div>
 </div>
 
@@ -54,8 +65,29 @@
     box-shadow: 0 0 48px 0 rgb(0 0 0 / 30%);
     max-width: 400px;
     height: 100%;
-    padding: 35px;
+    padding: 20px;
     background: #fff;
+  }
+
+  .suggestion-snippet {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    position: absolute;
+    top: 40.65%;
+    width: 185.4px;
+    height: 36px;
+    right: -20.6%;
+    background-color: #fff;
+    transform:rotate(270deg);
+    -ms-transform:rotate(270deg);
+    -webkit-transform:rotate(270deg);
+  }
+
+  .suggestion-text {
+    color: rgb(139, 70, 0);
+    margin-top: 7px;
+    text-align: center;
+    font-size: 12px;
   }
 
   .card-mk {
@@ -63,7 +95,8 @@
     padding: 20px;
     border: transparent;
     border-radius: 3px;
-    box-shadow: 0 0 5px 0 rgb(0 0 0 / 25%)
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 25%);
+    position: relative;
   }
 
   .btn-confirm {
@@ -72,5 +105,19 @@
 
   .btn-confirm:hover {
     color: rgb(139, 70, 0);
+  }
+
+  button[disabled] {
+    cursor: not-allowed !important;
+    color: #eee;
+  }
+
+  @media (max-width: 400px) {
+    .suggestion-snippet {
+      right: -74px;
+      width: 185px;
+      height: 36px;
+      top: 40%;
+    }
   }
 </style>

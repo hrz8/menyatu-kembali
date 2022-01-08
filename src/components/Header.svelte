@@ -16,6 +16,8 @@
       <button class="btn" on:click={async () => {
         try {
           await fetchDataLang()
+          localStorage.removeItem('g_code')
+          localStorage.removeItem('g_sess')
         } catch (error) {
           // do nothing
         }
