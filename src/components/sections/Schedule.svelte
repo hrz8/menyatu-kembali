@@ -65,7 +65,7 @@
     box-shadow: 0 0 48px 0 rgb(0 0 0 / 30%);
     max-width: 400px;
     height: 100%;
-    padding: 20px;
+    padding: 55px 20px;
     background: #fff;
   }
 
@@ -73,7 +73,7 @@
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
     position: absolute;
-    top: 40.65%;
+    top: 40%;
     width: 185.4px;
     height: 36px;
     right: -20.6%;

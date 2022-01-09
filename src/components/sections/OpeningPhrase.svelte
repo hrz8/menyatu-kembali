@@ -5,7 +5,7 @@
   import DateCard from './DateCard.svelte';
 </script>
 
-<div style="text-align: left; padding: 50px 30px">
+<div style="text-align: left; padding: 55px 30px">
   <p
     class="locale-text primary-text bold-text mb-0"
     style="font-size: 20px;"

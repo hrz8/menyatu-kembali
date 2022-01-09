@@ -26,7 +26,7 @@ export const toggleLanguage = async () => {
 
 export const fetchData = async () => {
   const activeLanguage = get(active)
-  const url = `https://opensheet.vercel.app/${sheetId}/${activeLanguage}`
+  const url = `https://opensheet.herokuapp.com/${sheetId}/${activeLanguage}`
   const response = await fetch(url)
   const result = (await response.json())[0]
   data.set(result || null)

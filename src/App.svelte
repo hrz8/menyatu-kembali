@@ -28,19 +28,19 @@
 <Styles />
 
 {#if $isDebugValid || $isGroupValid[1]}
-<main style="background: url('/background.png'); background-size: cover;">
-  <div id="container-mk">
-    <Header isDisplay={displayHeader} />
-    
-    <Content />
-    
-    <Navbar />
-  </div>
-</main>
+  <main style="background: url('/background.png'); background-size: cover;">
+    <div id="container-mk">
+      <Header isDisplay={displayHeader} />
+      
+      <Content />
+      
+      <Navbar />
+    </div>
+  </main>
 {:else}
-<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-  <div class="spinner-grow text-secondary" role="status" style="width: 3rem; height: 3rem;" ></div>
-</div>
+  <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="spinner-grow text-secondary" role="status" style="width: 3rem; height: 3rem;" ></div>
+  </div>
 {/if}
 
 <style>

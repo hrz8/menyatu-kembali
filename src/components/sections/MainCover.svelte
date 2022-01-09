@@ -24,10 +24,11 @@ import WishListModal from '../WishListModal.svelte';
       style="line-height: 1.5; font-size: 46px; color: #fff"
     >{$langDataStore?.cover_text_2 || 'cover_text_2'}</h1>
     <div style="margin-top: 30px;">
-      <button
+      <a
+        href="#gift"
         type="button"
         class="bold-text btn btn-hirzi"
-      >{$langDataStore?.cover_button_congrats || 'cover_button_congrats'}</button>
+      >{$langDataStore?.cover_button_congrats || 'cover_button_congrats'}</a>
       <button
         type="button"
         class="bold-text btn btn-urfa"

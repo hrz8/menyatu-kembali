@@ -16,7 +16,7 @@ export const fetchData = async () => {
     return
   }
 
-  const url = `https://opensheet.vercel.app/${sheetId}/master`
+  const url = `https://opensheet.herokuapp.com/${sheetId}/master`
   const response = await fetch(url)
   const result = (await response.json())[0]
 
