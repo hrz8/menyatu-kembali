@@ -1,15 +1,21 @@
 <script>
   import { onMount } from 'svelte'
-import { Quote } from 'svelte-bootstrap-icons'
-  import Swal from "sweetalert2"
+  import { Quote } from 'svelte-bootstrap-icons'
+  import Swal from 'sweetalert2'
+  import dayjs from 'dayjs'
 
   import { data as langDataStore } from '../../stores/lang'
   import WishListModal from '../WishListModal.svelte'
+  import relativeTime from 'dayjs/plugin/relativeTime'
+
+  dayjs.extend(relativeTime)
 
   const spreadsheetId = '11R5Y-Ue-q9dSC881umzk3zzEydtBT7Ve8cMZwlzZ_WE'
   const sheetId = 'messages'
   const spreadsheetUrl = `https://opensheet.herokuapp.com/${spreadsheetId}/${sheetId}`
-  const resetCacheUrl = `https://opensheet.herokuapp.com/cache/${spreadsheetId}-${sheetId}`
+  // const resetCacheUrl = `https://opensheet.herokuapp.com/cache/${spreadsheetId}-${sheetId}`
+  
+  $: sentAlready = localStorage.getItem('m')?.startsWith('messages!') || false
 
   let messagesState = []
 
@@ -56,11 +62,13 @@ import { Quote } from 'svelte-bootstrap-icons'
         body: JSON.stringify([
           nameInput,
           messageTextarea,
-          new Date().toLocaleString()
+          new Date().toLocaleString(),
+          new Date().toUTCString()
         ])
       })
       const result = await response.json()
       localStorage.setItem('m', result?.updates?.updatedRange)
+      sentAlready = true
       await fetchMessages()
       return result
     } catch (error) {
@@ -108,17 +116,17 @@ import { Quote } from 'svelte-bootstrap-icons'
         type="text"
         minlength="3"
         class="form-control"
-        disabled={sendingMessage}
+        disabled={sendingMessage || sentAlready}
         placeholder={$langDataStore?.section_gift_form_name || 'section_gift_form_name'}
         bind:value={nameInput}>
     </div>
     <div class="mb-3">
       <textarea
         class="form-control"
-        disabled={sendingMessage}
+        disabled={sendingMessage || sentAlready}
         placeholder={$langDataStore?.section_gift_form_message || 'section_gift_form_message'}
         minlength="10"
-        maxlength="140"
+        maxlength="500"
         rows="5"
         bind:value={messageTextarea}
       ></textarea>
@@ -127,9 +135,9 @@ import { Quote } from 'svelte-bootstrap-icons'
       <button
         type="submit"
         class="btn btn-urfa"
-        disabled={sendingMessage}
+        disabled={sendingMessage || sentAlready}
         on:click|preventDefault={() => {
-          if (nameInput.length > 3 && messageTextarea.length > 10) {
+          if (nameInput.length >= 3 && messageTextarea.length >= 10) {
             Swal.fire({...swal, icon: 'question'})
               .then(async (res) => {
                 if (res.value) {
@@ -144,7 +152,11 @@ import { Quote } from 'svelte-bootstrap-icons'
             })
           }
         }}
-      >{sendingMessage ? 'Sending...' : $langDataStore?.section_gift_form_send || 'section_gift_form_send'}</button>
+      >{sendingMessage ?
+        'Sending...' :
+          sentAlready ?
+            $langDataStore?.alert_send_message_alreadysent || 'alert_send_message_alreadysent' :
+            $langDataStore?.section_gift_form_send || 'section_gift_form_send'}</button>
     </div>
   </form>
 
@@ -160,12 +172,12 @@ import { Quote } from 'svelte-bootstrap-icons'
         {:else}
           {#each messagesState as message}
             <figure style="border-bottom: 1px dashed #f0b77e;">
-              <blockquote class="blockquote" style="font-size: 16px;">
+              <blockquote class="blockquote mb-4" style="font-size: 16px;">
                 <Quote width=24 height=24 />
                 <p style="padding-left: 12px;">{message.message}</p>
               </blockquote>
               <figcaption class="blockquote-footer" style="font-size: 12px; font-weight: 600;">
-                {message.name}
+                {message.name}<cite title="time ago"> - {dayjs().to(dayjs(message.submittedAtUTC))}</cite>
               </figcaption>
             </figure>
           {/each}

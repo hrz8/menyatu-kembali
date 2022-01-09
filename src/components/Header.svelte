@@ -18,6 +18,7 @@
           await fetchDataLang()
           localStorage.removeItem('g_code')
           localStorage.removeItem('g_sess')
+          localStorage.removeItem('m')
         } catch (error) {
           // do nothing
         }
