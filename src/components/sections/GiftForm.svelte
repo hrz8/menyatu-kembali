@@ -1,5 +1,8 @@
 <script>
-  import { Quote } from 'svelte-bootstrap-icons'
+  import { onMount } from 'svelte'
+import { Quote } from 'svelte-bootstrap-icons'
+  import Swal from "sweetalert2"
+
   import { data as langDataStore } from '../../stores/lang'
   import WishListModal from '../WishListModal.svelte'
 
@@ -10,11 +13,63 @@
 
   let messagesState = []
 
+  let nameInput = ''
+  let messageTextarea = ''
+  let sendingMessage = false
+
+  const swal = {
+    title: 'alert_send_message_title',
+    text: 'alert_send_message_text',
+    showCancelButton: true,
+    confirmButtonText: 'alert_send_message_yes',
+    cancelButtonText: 'alert_send_message_no'
+  }
+
+  onMount(() => {
+    langDataStore.subscribe((value) => {
+      swal.title = value.alert_send_message_title
+      swal.text = value.alert_send_message_text
+      swal.confirmButtonText = value.alert_send_message_yes
+      swal.cancelButtonText = value.alert_send_message_no
+    })
+  })
+
   const fetchMessages = async () => {
-    const response = await fetch(spreadsheetUrl)
-    const result = await response.json() || []
-    messagesState = result
-    return result
+    try {
+      const response = await fetch(spreadsheetUrl)
+      const result = (await response.json() || []).slice().reverse()
+      messagesState = result
+      return result
+    } catch (error) {
+      return []
+    }
+  }
+
+  const postMessage = async () => {
+    sendingMessage = true
+    try {
+      const response = await fetch(spreadsheetUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify([
+          nameInput,
+          messageTextarea,
+          new Date().toLocaleString()
+        ])
+      })
+      const result = await response.json()
+      localStorage.setItem('m', result?.updates?.updatedRange)
+      await fetchMessages()
+      return result
+    } catch (error) {
+      return null
+    } finally {
+      nameInput = ''
+      messageTextarea = ''
+      sendingMessage = false
+    }
   }
 </script>
 
@@ -49,13 +104,47 @@
 
   <form class="my-4">
     <div class="mb-3">
-      <input type="email" class="form-control" placeholder={$langDataStore?.section_gift_form_name || 'section_gift_form_name'} aria-describedby="emailHelp">
+      <input
+        type="text"
+        minlength="3"
+        class="form-control"
+        disabled={sendingMessage}
+        placeholder={$langDataStore?.section_gift_form_name || 'section_gift_form_name'}
+        bind:value={nameInput}>
     </div>
     <div class="mb-3">
-      <textarea class="form-control" placeholder={$langDataStore?.section_gift_form_message || 'section_gift_form_message'} maxlength="140" rows="5"></textarea>
+      <textarea
+        class="form-control"
+        disabled={sendingMessage}
+        placeholder={$langDataStore?.section_gift_form_message || 'section_gift_form_message'}
+        minlength="10"
+        maxlength="140"
+        rows="5"
+        bind:value={messageTextarea}
+      ></textarea>
     </div>
     <div class="d-grid">
-      <button type="submit" class="btn btn-urfa">{$langDataStore?.section_gift_form_send || 'section_gift_form_send'}</button>
+      <button
+        type="submit"
+        class="btn btn-urfa"
+        disabled={sendingMessage}
+        on:click|preventDefault={() => {
+          if (nameInput.length > 3 && messageTextarea.length > 10) {
+            Swal.fire({...swal, icon: 'question'})
+              .then(async (res) => {
+                if (res.value) {
+                  await postMessage()
+                }
+              })
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Make sure you send a valid name and message!'
+            })
+          }
+        }}
+      >{sendingMessage ? 'Sending...' : $langDataStore?.section_gift_form_send || 'section_gift_form_send'}</button>
     </div>
   </form>
 
@@ -65,11 +154,11 @@
         <div class="d-flex justify-content-center align-items-center">
           <div class="spinner-grow text-secondary" role="status" style="width: 3rem; height: 3rem;" ></div>
         </div>
-      {:then messages}
+      {:then}
         {#if !messagesState.length}
           <h6 style="font-weight: 600;">{$langDataStore?.section_gift_messages_empty || 'section_gift_messages_empty'}</h6>
         {:else}
-          {#each messages as message}
+          {#each messagesState as message}
             <figure style="border-bottom: 1px dashed #f0b77e;">
               <blockquote class="blockquote" style="font-size: 16px;">
                 <Quote width=24 height=24 />
