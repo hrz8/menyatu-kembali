@@ -11,17 +11,17 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <!-- <div style="height: 300px; width:100%">
+        <div style="height: 300px; width:100%">
           <Map />
-        </div> -->
-        <iframe
+        </div>
+        <!-- <iframe
           title={$langDataStore?.place_only || 'place_only'}
           src={$langDataStore?.map_iframe_src || 'map_iframe_src'}
           height="400"
           width="100%"
           style="border:0;"
           loading="lazy"
-        ></iframe>
+        ></iframe> -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

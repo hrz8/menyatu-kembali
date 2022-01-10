@@ -29,7 +29,7 @@
     showCancelButton: true,
     confirmButtonText: 'alert_send_message_yes',
     cancelButtonText: 'alert_send_message_no',
-    confirmButtonColor: '#f0b77e',
+    confirmButtonColor: '#c26522',
     cancelButtonColor: '#80a6b8'
   }
 
@@ -133,6 +133,7 @@
         minlength="3"
         class="form-control"
         disabled={sendingMessage || sentAlready}
+        style="font-size: 14px;"
         placeholder={$langDataStore?.section_gift_form_name || 'section_gift_form_name'}
         bind:value={nameInput}>
     </div>
@@ -144,6 +145,7 @@
         minlength="10"
         maxlength="500"
         rows="5"
+        style="font-size: 14px;"
         bind:value={messageTextarea}
       ></textarea>
     </div>
@@ -156,7 +158,7 @@
           if (nameInput.length < 3) {
             Swal.fire({
               icon: 'error',
-              confirmButtonColor: '#f0b77e',
+              confirmButtonColor: '#c26522',
               ...swalValidationName
             })
             return
@@ -164,7 +166,7 @@
           if (messageTextarea.length < 10) {
             Swal.fire({
               icon: 'error',
-              confirmButtonColor: '#f0b77e',
+              confirmButtonColor: '#c26522',
               ...swalValidationMessage
             })
             return
@@ -195,7 +197,7 @@
           <h6 style="font-weight: 600;">{$langDataStore?.section_gift_messages_empty || 'section_gift_messages_empty'}</h6>
         {:else}
           {#each messagesState as message}
-            <figure style="border-bottom: 1px dashed #f0b77e;">
+            <figure style="border-bottom: 1px dashed #c26522;">
               <blockquote class="blockquote mb-4" style="font-size: 16px;">
                 <Quote width=24 height=24 />
                 <p style="padding-left: 12px;">{message.message}</p>
@@ -220,11 +222,11 @@
 }
  
 ::-webkit-scrollbar-thumb {
-  background: #ffc387 !important; 
+  background: #f9c6a1 !important; 
   border-radius: 10px !important;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #f0b77e !important; 
+  background: #c26522 !important; 
 }
 </style>

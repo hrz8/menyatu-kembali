@@ -10,7 +10,7 @@
     style="font-size: 20px;"
   >{$langDataStore?.section_schedule_note || 'section_schedule_note'}</p>
 
-  <div class="card-mk mb-4" style="background-color: rgb(199, 216, 225); border: 1px solid rgb(165 208 231);">
+  <div class="card-mk mb-4" style="background-color: #d8e2e8; border: 1px solid #d8e2e8;">
     <!-- akad -->
     <p
       class="locale-text bold-text primary-text mb-2"
@@ -20,9 +20,10 @@
     >{$langDataStore?.place_only || 'place_only'}</p>
     <button
       class="px-0 btn btn-confirm mb-0"
-    >{$langDataStore?.cover_button_confirm || 'cover_button_confirm'} <ArrowRight /></button>
+      disabled={true}
+    ><i style="color: #3e3e3e;">{$langDataStore?.section_schedule_only_family || 'section_schedule_only_family'}</i></button>
   </div>
-  <div class="card-mk mb-4" style="background-color: rgb(255 197 156); border: 1px solid rgb(255, 149, 39);">
+  <div class="card-mk mb-4" style="background-color: #f9c5a1; border: 1px solid rgb(255, 149, 39);">
     <!-- resepsi 1 -->
     {#if $isGroupValid[0] === 1}
     <div class="suggestion-snippet">
@@ -40,7 +41,7 @@
       disabled={$isGroupValid[0] !== 1}
     >{$langDataStore?.cover_button_confirm || 'cover_button_confirm'} <ArrowRight /></button>
   </div>
-  <div class="card-mk" style="background-color: rgb(158 190 207); border: 1px solid rgb(86 166 209);">
+  <div class="card-mk" style="background-color: #9fb5c2; border: 1px solid #9fb5c2;">
     <!-- resepsi 2 -->
     {#if $isGroupValid[0] === 2}
     <div class="suggestion-snippet">

@@ -3,8 +3,7 @@
   import { data as langDataStore } from '../../stores/lang'
   import Carousel from './Carousel.svelte'
   import DateCard from './DateCard.svelte'
-  import MapGoogle from '../Map.svelte'
-import MapModal from '../MapModal.svelte'
+  import MapModal from '../MapModal.svelte'
 </script>
 
 <div style="text-align: left; padding: 55px 30px">
@@ -25,15 +24,9 @@ import MapModal from '../MapModal.svelte'
     <Carousel />
   </div>
   <div class="mt-4 d-flex justify-content-center">
-    <!-- <a
-      href="https://goo.gl/maps/Z4XUmgvTzHLhZVx37"
-      target="__blank"
-      class="btn btn-hirzi bold-text"
-      style="box-shadow: 0 0 48px 0 rgb(0 0 0 / 20%)"
-    > -->
     <button
       class="btn btn-hirzi bold-text"
-      style="box-shadow: 0 0 48px 0 rgb(0 0 0 / 20%)"
+      style="box-shadow: 0 0 30px 0 rgb(0 0 0 / 15%); border: 1px solid #c26522"
       data-bs-toggle="modal"
       data-bs-target="#mapModal">
       <Map width="24" height="24" />

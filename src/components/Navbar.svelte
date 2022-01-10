@@ -34,7 +34,7 @@
   }
 
   nav > a {
-    color: rgb(70 102 120) !important;
+    color: #304653 !important;
   }
 
   nav > a:hover {

@@ -27,17 +27,18 @@ import WishListModal from '../WishListModal.svelte';
       <a
         href="#gift"
         type="button"
-        class="bold-text btn btn-hirzi"
+        class="btn btn-hirzi"
       >{$langDataStore?.cover_button_congrats || 'cover_button_congrats'}</a>
       <button
         type="button"
-        class="bold-text btn btn-urfa"
+        class="btn btn-urfa"
         data-bs-toggle="modal"
         data-bs-target="#giftModal"
       >{$langDataStore?.cover_button_gift || 'cover_button_gift'}</button>
       <button
         type="button"
-        class="bold-text btn btn-urfa mt-3"
+        class="btn btn-urfa mt-3"
+        style="background-color: #68879a !important; border-color: #68879a !important"
       >{$langDataStore?.cover_button_confirm || 'cover_button_confirm'}</button>
     </div>
   </div>

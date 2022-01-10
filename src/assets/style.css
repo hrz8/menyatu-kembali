@@ -9,11 +9,15 @@ body {
 }
 
 .primary-text {
-  color: rgb(70 102 120) !important;
+  color: #304653 !important;
+}
+
+.secondary-text {
+  color: #68879a !important;
 }
 
 .primary-box {
-  border: 2px solid rgb(70 102 120);
+  border: 2px solid #304653;
 }
 
 .locale-text {
@@ -26,20 +30,20 @@ body {
 
 .btn-hirzi {
   color: #fff !important;
-  background-color: #ffc387 !important;
-  border-color: #ffc387 !important;
+  background-color: #f9c6a1 !important;
+  border-color: #f9c6a1 !important;
 }
 
 .btn-hirzi:hover {
   color: #fff !important;
-  background-color: #f0b77e !important;
-  border-color: #f0b77e !important;
+  background-color: #dfaf8e !important;
+  border-color: #dfaf8e !important;
 }
 
 .btn-urfa {
   color: #fff !important;
-  background-color: #96b8c8 !important;
-  border-color: #96b8c8 !important;
+  background-color: #9fb5c2 !important;
+  border-color: #9fb5c2 !important;
 }
 
 .btn-urfa:hover {

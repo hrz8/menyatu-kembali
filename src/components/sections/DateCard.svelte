@@ -38,7 +38,7 @@
   }
 
   .inner-box {
-    color: rgb(70 102 120);
+    color: #304653;
     font-size: 30px;
   }
 
