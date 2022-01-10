@@ -11,7 +11,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div style="height: 300px; width:100%">
+        <div style="height: 500px; width:100%">
           <Map />
         </div>
         <!-- <iframe
