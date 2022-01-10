@@ -1,6 +1,5 @@
+import { SPREADSHEET_LOCALE_ID } from '../config'
 import { writable, get } from 'svelte/store'
-
-const sheetId = '1KcByBhOAg4SdYnsdOH6fPT-1MKJHp1PNW4_0TbZeS_4'
 
 export const loading = writable(true)
 export const active = writable(localStorage.getItem('l') || 'id')
@@ -26,7 +25,7 @@ export const toggleLanguage = async () => {
 
 export const fetchData = async () => {
   const activeLanguage = get(active)
-  const url = `https://opensheet.herokuapp.com/${sheetId}/${activeLanguage}`
+  const url = `https://opensheet.herokuapp.com/${SPREADSHEET_LOCALE_ID}/${activeLanguage}`
   const response = await fetch(url)
   const result = (await response.json())[0]
   data.set(result || null)

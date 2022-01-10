@@ -7,15 +7,16 @@
   import { data as langDataStore } from '../../stores/lang'
   import WishListModal from '../WishListModal.svelte'
   import relativeTime from 'dayjs/plugin/relativeTime'
+  import {
+    SPREADSHEET_RESPONSE_ID,
+    SPREADSHEET_RESPONSE_MESSAGE_SHEET_NAME
+  } from '../../config';
 
   dayjs.extend(relativeTime)
 
-  const spreadsheetId = '11R5Y-Ue-q9dSC881umzk3zzEydtBT7Ve8cMZwlzZ_WE'
-  const sheetId = 'messages'
-  const spreadsheetUrl = `https://opensheet.herokuapp.com/${spreadsheetId}/${sheetId}`
-  // const resetCacheUrl = `https://opensheet.herokuapp.com/cache/${spreadsheetId}-${sheetId}`
+  const spreadsheetUrl = `https://opensheet.herokuapp.com/${SPREADSHEET_RESPONSE_ID}/${SPREADSHEET_RESPONSE_MESSAGE_SHEET_NAME}`
   
-  $: sentAlready = localStorage.getItem('m')?.startsWith('messages!') || false
+  $: sentAlready = localStorage.getItem('m')?.startsWith(`${SPREADSHEET_RESPONSE_MESSAGE_SHEET_NAME}!`) || false
 
   let messagesState = []
 

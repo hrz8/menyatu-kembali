@@ -1,6 +1,8 @@
+import {
+  SPREADSHEET_TOKEN_ID,
+  SPREADSHEET_TOKEN_SHEET_NAME
+} from '../config'
 import { writable, get } from 'svelte/store'
-
-const sheetId = '1Q4xbGVXImImBabQG-XFBG2cmaa3PQVPZIKtswmJ_ieQ'
 
 export const isGroupValid = writable([-1, false])
 export const isDebugValid = writable(false)
@@ -16,7 +18,7 @@ export const fetchData = async () => {
     return
   }
 
-  const url = `https://opensheet.herokuapp.com/${sheetId}/master`
+  const url = `https://opensheet.herokuapp.com/${SPREADSHEET_TOKEN_ID}/${SPREADSHEET_TOKEN_SHEET_NAME}`
   const response = await fetch(url)
   const result = (await response.json())[0]
 
