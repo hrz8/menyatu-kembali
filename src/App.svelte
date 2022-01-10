@@ -8,6 +8,8 @@
   import { initialFetchData as initialFetchDataLang } from './stores/lang'
   import { isGroupValid, fetchData as fetchDataGroup, isDebugValid } from './stores/params'
 
+  export let ready
+
   let displayHeader = false;
 
   window.onscroll = function() {
@@ -25,6 +27,10 @@
   })
 </script>
 
+<svelte:head>
+	<script defer async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwh7YlcGx-F2MVMZjLF4uOol3SVPC4JZM&callback=initMap"></script>
+</svelte:head>
+
 <Styles />
 
 {#if $isDebugValid || $isGroupValid[1]}
@@ -32,7 +38,7 @@
     <div id="container-mk">
       <Header isDisplay={displayHeader} />
       
-      <Content />
+      <Content {ready} />
       
       <Navbar />
     </div>
