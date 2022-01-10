@@ -121,94 +121,96 @@
     data-bs-target="#giftModal"
   >{$langDataStore?.section_gift_send_gift || 'section_gift_send_gift'}</button>
 
-  <p
-    class="locale-text bold-text primary-text"
-    style="font-size: 20px;"
-  >{$langDataStore?.section_gift_form_title || 'section_gift_form_title'}</p>
+  <div id="congrats">
+    <p
+      class="locale-text bold-text primary-text"
+      style="font-size: 20px;"
+    >{$langDataStore?.section_gift_form_title || 'section_gift_form_title'}</p>
 
-  <form class="my-4">
-    <div class="mb-3">
-      <input
-        type="text"
-        minlength="3"
-        class="form-control"
-        disabled={sendingMessage || sentAlready}
-        style="font-size: 14px;"
-        placeholder={$langDataStore?.section_gift_form_name || 'section_gift_form_name'}
-        bind:value={nameInput}>
-    </div>
-    <div class="mb-3">
-      <textarea
-        class="form-control"
-        disabled={sendingMessage || sentAlready}
-        placeholder={$langDataStore?.section_gift_form_message || 'section_gift_form_message'}
-        minlength="10"
-        maxlength="500"
-        rows="5"
-        style="font-size: 14px;"
-        bind:value={messageTextarea}
-      ></textarea>
-    </div>
-    <div class="d-grid">
-      <button
-        type="submit"
-        class="btn btn-urfa"
-        disabled={sendingMessage || sentAlready}
-        on:click|preventDefault={() => {
-          if (nameInput.length < 3) {
-            Swal.fire({
-              icon: 'error',
-              confirmButtonColor: '#c26522',
-              ...swalValidationName
-            })
-            return
-          }
-          if (messageTextarea.length < 10) {
-            Swal.fire({
-              icon: 'error',
-              confirmButtonColor: '#c26522',
-              ...swalValidationMessage
-            })
-            return
-          }
-          Swal.fire({...swal, icon: 'question'})
-            .then(async (res) => {
-              if (res.value) {
-                await postMessage()
-              }
-            })
-        }}
-      >{sendingMessage ?
-        'Sending...' :
-          sentAlready ?
-            $langDataStore?.alert_send_message_alreadysent || 'alert_send_message_alreadysent' :
-            $langDataStore?.section_gift_form_send || 'section_gift_form_send'}</button>
-    </div>
-  </form>
+    <form class="my-4">
+      <div class="mb-3">
+        <input
+          type="text"
+          minlength="3"
+          class="form-control"
+          disabled={sendingMessage || sentAlready}
+          style="font-size: 14px;"
+          placeholder={$langDataStore?.section_gift_form_name || 'section_gift_form_name'}
+          bind:value={nameInput}>
+      </div>
+      <div class="mb-3">
+        <textarea
+          class="form-control"
+          disabled={sendingMessage || sentAlready}
+          placeholder={$langDataStore?.section_gift_form_message || 'section_gift_form_message'}
+          minlength="10"
+          maxlength="500"
+          rows="5"
+          style="font-size: 14px;"
+          bind:value={messageTextarea}
+        ></textarea>
+      </div>
+      <div class="d-grid">
+        <button
+          type="submit"
+          class="btn btn-urfa"
+          disabled={sendingMessage || sentAlready}
+          on:click|preventDefault={() => {
+            if (nameInput.length < 3) {
+              Swal.fire({
+                icon: 'error',
+                confirmButtonColor: '#c26522',
+                ...swalValidationName
+              })
+              return
+            }
+            if (messageTextarea.length < 10) {
+              Swal.fire({
+                icon: 'error',
+                confirmButtonColor: '#c26522',
+                ...swalValidationMessage
+              })
+              return
+            }
+            Swal.fire({...swal, icon: 'question'})
+              .then(async (res) => {
+                if (res.value) {
+                  await postMessage()
+                }
+              })
+          }}
+        >{sendingMessage ?
+          'Sending...' :
+            sentAlready ?
+              $langDataStore?.alert_send_message_alreadysent || 'alert_send_message_alreadysent' :
+              $langDataStore?.section_gift_form_send || 'section_gift_form_send'}</button>
+      </div>
+    </form>
 
-  <div class="card shadow p-2 my-3 bg-body rounded" style="max-height: 300px; overflow-y: auto;">
-    <div class="card-body">
-      {#await fetchMessages()}
-        <div class="d-flex justify-content-center align-items-center">
-          <div class="spinner-grow text-secondary" role="status" style="width: 3rem; height: 3rem;" ></div>
-        </div>
-      {:then}
-        {#if !messagesState.length}
-          <h6 style="font-weight: 600;">{$langDataStore?.section_gift_messages_empty || 'section_gift_messages_empty'}</h6>
-        {:else}
-          {#each messagesState as message}
-            <figure style="border-bottom: 1px dashed #c26522;">
-              <blockquote class="blockquote mb-4" style="font-size: 16px;">
-                <Quote width=24 height=24 />
-                <p style="padding-left: 12px;">{message.message}</p>
-              </blockquote>
-              <figcaption class="blockquote-footer" style="font-size: 12px; font-weight: 600;">
-                {message.name}<cite title="time ago"> - {dayjs().to(dayjs(message.submittedAtUTC))}</cite>
-              </figcaption>
-            </figure>
-          {/each}
-        {/if}
-      {/await}
+    <div class="card shadow p-2 my-3 bg-body rounded" style="max-height: 300px; overflow-y: auto;">
+      <div class="card-body">
+        {#await fetchMessages()}
+          <div class="d-flex justify-content-center align-items-center">
+            <div class="spinner-grow text-secondary" role="status" style="width: 3rem; height: 3rem;" ></div>
+          </div>
+        {:then}
+          {#if !messagesState.length}
+            <h6 style="font-weight: 600;">{$langDataStore?.section_gift_messages_empty || 'section_gift_messages_empty'}</h6>
+          {:else}
+            {#each messagesState as message}
+              <figure style="border-bottom: 1px dashed #c26522;">
+                <blockquote class="blockquote mb-4" style="font-size: 16px;">
+                  <Quote width=24 height=24 />
+                  <p style="padding-left: 12px;">{message.message}</p>
+                </blockquote>
+                <figcaption class="blockquote-footer" style="font-size: 12px; font-weight: 600;">
+                  {message.name}<cite title="time ago"> - {dayjs().to(dayjs(message.submittedAtUTC))}</cite>
+                </figcaption>
+              </figure>
+            {/each}
+          {/if}
+        {/await}
+      </div>
     </div>
   </div>
 </div>

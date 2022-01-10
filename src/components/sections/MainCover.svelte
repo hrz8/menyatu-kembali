@@ -25,7 +25,7 @@ import WishListModal from '../WishListModal.svelte';
     >{$langDataStore?.cover_text_2 || 'cover_text_2'}</h1>
     <div style="margin-top: 30px;">
       <a
-        href="#gift"
+        href="#congrats"
         type="button"
         class="btn btn-hirzi"
       >{$langDataStore?.cover_button_congrats || 'cover_button_congrats'}</a>
