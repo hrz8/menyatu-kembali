@@ -46,14 +46,14 @@
 
   onMount(() => {
     langDataStore.subscribe((value) => {
-      swal.title = value.alert_send_message_title
-      swal.text = value.alert_send_message_text
-      swal.confirmButtonText = value.alert_send_message_yes
-      swal.cancelButtonText = value.alert_send_message_no
-      swalValidationName.title = value.alert_send_message_oops
-      swalValidationName.text = value.alert_send_message_validation_name
-      swalValidationMessage.title = value.alert_send_message_oops
-      swalValidationMessage.text = value.alert_send_message_validation_message
+      swal.title = value?.alert_send_message_title || 'alert_send_message_oops'
+      swal.text = value?.alert_send_message_text || 'alert_send_message_text'
+      swal.confirmButtonText = value?.alert_send_message_yes || 'alert_send_message_yes'
+      swal.cancelButtonText = value?.alert_send_message_no || 'alert_send_message_no'
+      swalValidationName.title = value?.alert_send_message_oops || 'alert_send_message_oops'
+      swalValidationName.text = value?.alert_send_message_validation_name || 'alert_send_message_validation_name'
+      swalValidationMessage.title = value?.alert_send_message_oops || 'alert_send_message_oops'
+      swalValidationMessage.text = value?.alert_send_message_validation_message || 'alert_send_message_validation_message'
     })
   })
 
