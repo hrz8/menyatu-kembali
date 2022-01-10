@@ -30,7 +30,7 @@
     style="box-shadow: 0 0 48px 0 rgb(0 0 0 / 20%)"
   >
     <Map width="24" height="24" />
-    <span class="px-3">{$langDataStore?.open_map_button || 'open_map_button'}</span>
+    <span class="px-1">{$langDataStore?.open_map_button || 'open_map_button'}</span>
     <ArrowRight width="24" height="24" />
   </a>
   </div>

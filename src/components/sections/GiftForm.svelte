@@ -28,7 +28,19 @@
     text: 'alert_send_message_text',
     showCancelButton: true,
     confirmButtonText: 'alert_send_message_yes',
-    cancelButtonText: 'alert_send_message_no'
+    cancelButtonText: 'alert_send_message_no',
+    confirmButtonColor: '#f0b77e',
+    cancelButtonColor: '#80a6b8'
+  }
+
+  const swalValidationName = {
+    title: 'alert_send_message_oops',
+    text: 'alert_send_message_validation_name'
+  }
+
+  const swalValidationMessage = {
+    title: 'alert_send_message_oops',
+    text: 'alert_send_message_validation_message'
   }
 
   onMount(() => {
@@ -37,6 +49,10 @@
       swal.text = value.alert_send_message_text
       swal.confirmButtonText = value.alert_send_message_yes
       swal.cancelButtonText = value.alert_send_message_no
+      swalValidationName.title = value.alert_send_message_oops
+      swalValidationName.text = value.alert_send_message_validation_name
+      swalValidationMessage.title = value.alert_send_message_oops
+      swalValidationMessage.text = value.alert_send_message_validation_message
     })
   })
 
@@ -137,20 +153,28 @@
         class="btn btn-urfa"
         disabled={sendingMessage || sentAlready}
         on:click|preventDefault={() => {
-          if (nameInput.length >= 3 && messageTextarea.length >= 10) {
-            Swal.fire({...swal, icon: 'question'})
-              .then(async (res) => {
-                if (res.value) {
-                  await postMessage()
-                }
-              })
-          } else {
+          if (nameInput.length < 3) {
             Swal.fire({
               icon: 'error',
-              title: 'Oops...',
-              text: 'Make sure you send a valid name and message!'
+              confirmButtonColor: '#f0b77e',
+              ...swalValidationName
             })
+            return
           }
+          if (messageTextarea.length < 10) {
+            Swal.fire({
+              icon: 'error',
+              confirmButtonColor: '#f0b77e',
+              ...swalValidationMessage
+            })
+            return
+          }
+          Swal.fire({...swal, icon: 'question'})
+            .then(async (res) => {
+              if (res.value) {
+                await postMessage()
+              }
+            })
         }}
       >{sendingMessage ?
         'Sending...' :
