@@ -4,7 +4,8 @@
     active as langActiveStore,
     toggleLanguage
   } from '../../stores/lang'
-import WishListModal from '../WishListModal.svelte';
+  import ModalAttendance from '../ModalAttendance.svelte';
+  import WishListModal from '../WishListModal.svelte';
 </script>
 
 <div class="img-cover" style="background: url('/jumbotron-header.jpeg'); background-size: cover;">
@@ -38,6 +39,8 @@ import WishListModal from '../WishListModal.svelte';
       <button
         type="button"
         class="btn btn-urfa mt-3"
+        data-bs-toggle="modal"
+        data-bs-target="#confirmModal"
         style="background-color: #68879a !important; border-color: #68879a !important"
       >{$langDataStore?.cover_button_confirm || 'cover_button_confirm'}</button>
     </div>
@@ -45,6 +48,7 @@ import WishListModal from '../WishListModal.svelte';
 </div>
 
 <WishListModal />
+<ModalAttendance />
 
 <style>
   .img-cover {
