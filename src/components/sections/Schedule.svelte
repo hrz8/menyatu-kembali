@@ -2,6 +2,7 @@
   import { data as langDataStore } from '../../stores/lang'
   import { ArrowRight } from 'svelte-bootstrap-icons'
   import { isGroupValid } from '../../stores/params'
+  import ModalAttendance from '../ModalAttendance.svelte'
 </script>
 
 <div class="schedule" style="text-align: left; background: url('/background-cropped.jpeg'); background-size: cover;">
@@ -38,6 +39,8 @@
     >{$langDataStore?.place_only || 'place_only'}</p>
     <button
       class="px-0 btn btn-confirm mb-0"
+      data-bs-toggle="modal"
+      data-bs-target="#confirmModal"
       disabled={$isGroupValid[0] !== 1}
     >{$langDataStore?.cover_button_confirm || 'cover_button_confirm'} <ArrowRight /></button>
   </div>
@@ -56,10 +59,14 @@
     >{$langDataStore?.place_only || 'place_only'}</p>
     <button
       class="px-0 btn btn-confirm mb-0"
+      data-bs-toggle="modal"
+      data-bs-target="#confirmModal"
       disabled={$isGroupValid[0] !== 2}
       >{$langDataStore?.cover_button_confirm || 'cover_button_confirm'} <ArrowRight /></button>
   </div>
 </div>
+
+<ModalAttendance />
 
 <style>
   .schedule {
