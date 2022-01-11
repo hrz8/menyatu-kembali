@@ -133,6 +133,7 @@
         <input
           type="text"
           minlength="3"
+          maxlength="100"
           class="form-control"
           disabled={sendingMessage || sentAlready}
           style="font-size: 14px;"
