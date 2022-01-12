@@ -5,10 +5,6 @@
   let mapContainer
   let map
 
-  langDataStore.subscribe((val) => {
-    initMap(val)
-  })
-
   onMount(async () => {
     langDataStore.subscribe((val) => {
       initMap(val)
@@ -38,7 +34,7 @@
 
   function initMap(lang) {
     // @ts-ignore
-    const mapLatLang = new google.maps.LatLng(-6.865941, 107.6297091)
+    const mapLatLang = new google.maps.LatLng(Number(lang?.event_latitude) || 0, Number(lang?.event_longitude) || 0)
 
     // @ts-ignore
     map = new google.maps.Map(

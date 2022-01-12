@@ -6,31 +6,28 @@
   import {
     SPREADSHEET_RESPONSE_ATTENDANCE_SHEET_NAME,
     SPREADSHEET_RESPONSE_ID
-  } from 'src/config';
+  } from '../config';
+
+  let sentAlready = false
+  let isAttendOrMaybe = true
 
   const spreadsheetUrl = `https://opensheet.herokuapp.com/${SPREADSHEET_RESPONSE_ID}/${SPREADSHEET_RESPONSE_ATTENDANCE_SHEET_NAME}`
 
-  $: sentAlready = localStorage.getItem('cfmd') !== null
+  $: {
+    sentAlready = localStorage.getItem('cfmd') !== null
+    isAttendOrMaybe = isAttendInput === 0 || isAttendInput === 2
+  }
 
   const g_sess = Number(localStorage.getItem('g_sess'))
   const e_sess = JSON.parse(localStorage.getItem('e_sess') || '[]')
 
-  let isAttendOrMaybe = true
-
   let nameInput = ''
   let emailInput = ''
   let originInput = ''
-  let isAttendInput = null
+  let isAttendInput = 0
   let sessionInput = null
   let personAmountInput = 0
   let sendingCorfimation = false
-
-  langDataStore.subscribe(val => {
-    isAttendInput = val?.confirm_placeholder_isattend_options.split(',')[0]
-    isAttendOrMaybe =
-      (val?.confirm_placeholder_isattend_options || '').split(',')[0] === isAttendInput
-      || (val?.confirm_placeholder_isattend_options || '').split(',')[2] === isAttendInput
-  });
 
   sessionIdsStore.subscribe(val => {
     sessionInput = val[g_sess - 1]
@@ -66,6 +63,22 @@
     text: 'alert_send_confirmation_validation_personAmount'
   }
 
+  langDataStore.subscribe(val => {
+    swal.title = val?.alert_send_message_title || 'alert_send_message_oops'
+    swal.text = val?.alert_send_message_text || 'alert_send_message_text'
+    swal.confirmButtonText = val?.alert_send_message_yes || 'alert_send_message_yes'
+    swal.cancelButtonText = val?.alert_send_message_no || 'alert_send_message_no'
+    swalValidationEmail.title = val?.alert_send_message_oops || 'alert_send_message_oops'
+    swalValidationName.title = val?.alert_send_message_oops || 'alert_send_message_oops'
+    swalValidationOrigin.title = val?.alert_send_message_oops || 'alert_send_message_oops'
+    swalValidationPersonAmount.title = val?.alert_send_message_oops || 'alert_send_message_oops'
+    swalValidationEmail.text = val?.alert_send_confirmation_validation_email || 'alert_send_confirmation_validation_email'
+    swalValidationName.text = val?.alert_send_message_validation_name || 'alert_send_message_validation_name'
+    swalValidationOrigin.text = val?.alert_send_confirmation_validation_origin || 'alert_send_confirmation_validation_origin'
+    swalValidationPersonAmount.text = val?.alert_send_confirmation_validation_personAmount || 'alert_send_confirmation_validation_personAmount'
+
+  })
+
   const mappingIsAttend = (isAttendInput) => {
     switch (isAttendInput) {
       case 0:
@@ -79,6 +92,19 @@
     }
   }
 
+  const mappingIsAttendGoogleCalendar = (value) => {
+    switch (value) {
+      case 0:
+        return 'declined'
+      case 1:
+        return 'accepted'
+      case 'TENTATIVE':
+        return 'tentative'
+      default:
+        return ''
+    }
+  }
+
   const postConfirmation = async () => {
     sendingCorfimation = true
     try {
@@ -87,8 +113,13 @@
         emailInput,
         originInput,
         mappingIsAttend(isAttendInput),
-        e_sess.findIndex((o) => o === sessionInput),
-        personAmountInput,
+        mappingIsAttend(isAttendInput) === 0
+          ? 'N/A'
+          : e_sess.findIndex((o) => o === sessionInput) + 1,
+        g_sess,
+        mappingIsAttend(isAttendInput) === 0
+          ? 'N/A'
+          : personAmountInput,
         new Date().toLocaleString(),
         new Date().toUTCString()
       ])
@@ -102,12 +133,33 @@
       const result = await response.json()
       localStorage.setItem('cfmd', payload)
       sentAlready = true
+      if (emailInput.length) {
+        const responseCal = await fetch(
+          `https://gopencalendar.herokuapp.com/send/${sessionInput}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            recipient: emailInput,
+            response: mappingIsAttendGoogleCalendar(mappingIsAttend(isAttendInput))
+          })
+        })
+        const resultCal = await responseCal.json()
+        return resultCal
+      }
       return result
     } catch (error) {
       return null
     } finally {
       sendingCorfimation = false
     }
+  }
+
+  const parseLang = (lang, key, replace, name) => {
+    const str = lang?.[key] || key
+    const res = str.replace(replace, name)
+    return res
   }
 </script>
 
@@ -120,7 +172,28 @@
       </div>
       <div class="modal-body text-start">
         {#if sentAlready}
-          <h3>Hi {JSON.parse(localStorage.getItem('cfmd'))?.[0]}, thank you for your confirmation</h3>
+          <h5
+            class="bold-text mb-3"
+          >{parseLang(
+              $langDataStore,
+              'confirmation_label_placeholder_heading_already',
+              '{{name}}',
+              JSON.parse(localStorage.getItem('cfmd'))?.[0]
+            )}</h5>
+          {#if JSON.parse(localStorage.getItem('cfmd'))?.[3]}
+            <p>{parseLang(
+              $langDataStore,
+              'thank_you_confirmed',
+              '{{session}}',
+              localStorage.getItem('l') === 'en'
+                ? (
+                    JSON.parse(localStorage.getItem('cfmd'))?.[4] === 1
+                      ? `${JSON.parse(localStorage.getItem('cfmd'))?.[4]}st`
+                      : `${JSON.parse(localStorage.getItem('cfmd'))?.[4]}nd`
+                  )
+                : JSON.parse(localStorage.getItem('cfmd'))?.[4]
+              )}</p>
+          {/if}
         {:else}
           <form>
             <div class="mb-3">
@@ -146,7 +219,10 @@
                 bind:value={originInput}>
             </div>
             <div class="mb-3">
-              <label for="isAttendInput" class="form-label">{$langDataStore?.confirm_placeholder_isattend || 'confirm_placeholder_isattend'}</label>
+              <label
+                for="isAttendInput"
+                class="form-label"
+              >{$langDataStore?.confirm_placeholder_isattend || 'confirm_placeholder_isattend'}</label>
               <select
                 id="isAttendInput"
                 class="form-select"
@@ -162,16 +238,20 @@
             </div>
             {#if isAttendOrMaybe}
               <div class="mb-3">
-                <label for="sessionInput" class="form-label">{$langDataStore?.confirm_placeholder_session || 'confirm_placeholder_session'}</label>
+                <label
+                  for="sessionInput"
+                  class="form-label"
+                >{$langDataStore?.confirm_placeholder_session || 'confirm_placeholder_session'}</label>
                 <select
                   id="sessionInput"
                   class="form-select"
                   size="2"
                   aria-label="attendance session"
+                  disabled={sendingCorfimation || sentAlready}
                   bind:value={sessionInput}
                 >
                   {#each ($langDataStore?.confirm_placeholder_session_options || '').split(',') as option, i}
-                    <option value={$sessionIdsStore[i]} selected={g_sess - 1 === i}>{option}{g_sess - 1 === i ? ' - Recommended' : ''}</option>
+                    <option value={e_sess[i]}>{option}{g_sess - 1 === i ? ' - Recommended' : ''}</option>
                   {/each}
                 </select>
               </div>
@@ -204,7 +284,11 @@
         {/if}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >Close</button>
         <button
           type="submit"
           class="btn btn-urfa"
@@ -215,6 +299,14 @@
                 icon: 'error',
                 confirmButtonColor: '#c26522',
                 ...swalValidationName
+              })
+              return
+            }
+            if (originInput.length < 3 || originInput.length > 512) {
+              Swal.fire({
+                icon: 'error',
+                confirmButtonColor: '#c26522',
+                ...swalValidationOrigin
               })
               return
             }
@@ -234,14 +326,6 @@
                 icon: 'error',
                 confirmButtonColor: '#c26522',
                 ...swalValidationPersonAmount
-              })
-              return
-            }
-            if (originInput.length < 3 || originInput.length > 512) {
-              Swal.fire({
-                icon: 'error',
-                confirmButtonColor: '#c26522',
-                ...swalValidationOrigin
               })
               return
             }

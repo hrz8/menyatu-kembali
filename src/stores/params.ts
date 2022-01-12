@@ -16,12 +16,14 @@ export const fetchData = async () => {
 
   if (localStorage.getItem('g_code') && localStorage.getItem('g_sess')) {
     isGroupValid.set([Number(localStorage.getItem('g_sess')), true])
-    return
   }
 
   if (localStorage.getItem('e_sess')) {
     const eventIds = JSON.parse(localStorage.getItem('e_sess'))
     sessionIds.set([eventIds[0], eventIds[1]])
+  }
+
+  if ((localStorage.getItem('g_code') && localStorage.getItem('g_sess')) || localStorage.getItem('e_sess')) {
     return
   }
 
