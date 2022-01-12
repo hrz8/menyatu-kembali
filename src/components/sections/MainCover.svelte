@@ -41,6 +41,7 @@
         class="btn btn-urfa mt-3"
         data-bs-toggle="modal"
         data-bs-target="#confirmModal"
+        disabled={!(new Date() < new Date($langDataStore?.event_date_gmt || 999999999999999))}
         style="background-color: #68879a !important; border-color: #68879a !important"
       >{$langDataStore?.cover_button_confirm || 'cover_button_confirm'}</button>
     </div>
