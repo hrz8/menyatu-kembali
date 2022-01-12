@@ -26,7 +26,7 @@
   let originInput = ''
   let isAttendInput = 0
   let sessionInput = null
-  let personAmountInput = 0
+  let personAmountInput = 1
   let sendingCorfimation = false
 
   sessionIdsStore.subscribe(val => {
@@ -76,7 +76,6 @@
     swalValidationName.text = val?.alert_send_message_validation_name || 'alert_send_message_validation_name'
     swalValidationOrigin.text = val?.alert_send_confirmation_validation_origin || 'alert_send_confirmation_validation_origin'
     swalValidationPersonAmount.text = val?.alert_send_confirmation_validation_personAmount || 'alert_send_confirmation_validation_personAmount'
-
   })
 
   const mappingIsAttend = (isAttendInput) => {
@@ -164,7 +163,7 @@
 
   const parseMaybe = (value, replace) => {
     if (JSON.parse(localStorage.getItem('cfmd'))?.[3] !== 'TENTATIVE') {
-      return value
+      return value.replace('{{maybe}}', ' ')
     }
     const res = value.replace('{{maybe}}', replace)
     return res
