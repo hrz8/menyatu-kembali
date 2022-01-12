@@ -1,5 +1,5 @@
 <script>
-  import { get } from 'svelte/store';
+  import Swal from 'sweetalert2'
 
   import { data as langDataStore } from '../stores/lang'
   import { sessionIds as sessionIdsStore } from '../stores/params'
@@ -7,6 +7,8 @@
   $: sentAlready = localStorage.getItem('c') !== null
 
   const g_sess = Number(localStorage.getItem('g_sess'))
+
+  let isAttendOrMaybe = true
 
   let nameInput = ''
   let emailInput = ''
@@ -18,11 +20,48 @@
 
   langDataStore.subscribe(val => {
     isAttendInput = val?.confirm_placeholder_isattend_options.split(',')[0]
+    isAttendOrMaybe =
+      (val?.confirm_placeholder_isattend_options || '').split(',')[0] === isAttendInput
+      || (val?.confirm_placeholder_isattend_options || '').split(',')[2] === isAttendInput
   });
 
   sessionIdsStore.subscribe(val => {
     sessionInput = val[g_sess - 1]
   })
+
+  const swal = {
+    title: 'alert_send_message_title',
+    text: 'alert_send_confirmation_text',
+    showCancelButton: true,
+    confirmButtonText: 'alert_send_message_yes',
+    cancelButtonText: 'alert_send_message_no',
+    confirmButtonColor: '#c26522',
+    cancelButtonColor: '#80a6b8'
+  }
+
+  const swalValidationEmail = {
+    title: 'alert_send_message_oops',
+    text: 'alert_send_confirmation_validation_email'
+  }
+
+  const swalValidationName = {
+    title: 'alert_send_message_oops',
+    text: 'alert_send_message_validation_name'
+  }
+
+  const swalValidationOrigin = {
+    title: 'alert_send_message_oops',
+    text: 'alert_send_confirmation_validation_origin'
+  }
+
+  const swalValidationPersonAmount = {
+    title: 'alert_send_message_oops',
+    text: 'alert_send_confirmation_validation_personAmount'
+  }
+
+  const postConfirmation = async () => {
+    sendingCorfimation = true
+  }
 </script>
 
 <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
@@ -70,10 +109,7 @@
               {/each}
             </select>
           </div>
-          {#if (
-            $langDataStore?.confirm_placeholder_isattend_options || '').split(',')[0] === isAttendInput
-            || ($langDataStore?.confirm_placeholder_isattend_options || '').split(',')[2] === isAttendInput
-          }
+          {#if isAttendOrMaybe}
             <div class="mb-3">
               <label for="sessionInput" class="form-label">{$langDataStore?.confirm_placeholder_session || 'confirm_placeholder_session'}</label>
               <select
@@ -106,6 +142,7 @@
                 id="personAmountInput"
                 type="number"
                 min="1"
+                max="20"
                 class="form-control"
                 disabled={sendingCorfimation || sentAlready}
                 style="font-size: 14px;"
@@ -120,6 +157,49 @@
           type="submit"
           class="btn btn-urfa"
           disabled={sendingCorfimation || sentAlready}
+          on:click|preventDefault={() => {
+            if (nameInput.length < 3 || nameInput.length > 256) {
+              Swal.fire({
+                icon: 'error',
+                confirmButtonColor: '#c26522',
+                ...swalValidationName
+              })
+              return
+            }
+            if (
+                emailInput.length
+                && !emailInput.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+              ) {
+              Swal.fire({
+                icon: 'error',
+                confirmButtonColor: '#c26522',
+                ...swalValidationEmail
+              })
+              return
+            }
+            if (isAttendOrMaybe && (personAmountInput < 1 || personAmountInput > 20)) {
+              Swal.fire({
+                icon: 'error',
+                confirmButtonColor: '#c26522',
+                ...swalValidationPersonAmount
+              })
+              return
+            }
+            if (originInput.length < 3 || originInput.length > 512) {
+              Swal.fire({
+                icon: 'error',
+                confirmButtonColor: '#c26522',
+                ...swalValidationOrigin
+              })
+              return
+            }
+            Swal.fire({...swal, icon: 'question'})
+              .then(async (res) => {
+                if (res.value) {
+                  await postConfirmation()
+                }
+              })
+          }}
         >{sendingCorfimation ?
           'Confirming...' :
             sentAlready ?
