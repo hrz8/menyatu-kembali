@@ -1,29 +1,30 @@
 <script>
   import { onMount } from 'svelte'
-  import { get } from 'svelte/store'
   import { data as langDataStore } from '../stores/lang'
 
   let mapContainer
   let map
 
   onMount(async () => {
-    initMap()
+    langDataStore.subscribe((val) => {
+      initMap(val)
+    })
   })
 
-  const buildInfoWindowContent = () => {
+  const buildInfoWindowContent = (lang) => {
     const content = document.createElement("div")
     content.style.padding = '10px'
 
     const nameElement = document.createElement("h6")
-    nameElement.textContent = get(langDataStore)?.place_only || 'place_only'
+    nameElement.textContent = lang?.place_only || 'place_only'
     content.appendChild(nameElement)
 
     const placeAddressElement = document.createElement("p")
-    placeAddressElement.textContent = get(langDataStore)?.place_address || 'place_address'
+    placeAddressElement.textContent = lang?.place_address || 'place_address'
     content.appendChild(placeAddressElement)
 
     const linkElement = document.createElement("a")
-    linkElement.href = get(langDataStore)?.place_link || 'place_link'
+    linkElement.href = lang?.place_link || 'place_link'
     linkElement.target = '_blank'
     linkElement.append('View on Google Maps')
     content.appendChild(linkElement)
@@ -31,9 +32,9 @@
     return content
   }
 
-  function initMap() {
+  function initMap(lang) {
     // @ts-ignore
-    const mapLatLang = new google.maps.LatLng(-6.865941, 107.6297091)
+    const mapLatLang = new google.maps.LatLng(Number(lang?.event_latitude) || 0, Number(lang?.event_longitude) || 0)
 
     // @ts-ignore
     map = new google.maps.Map(
@@ -49,12 +50,12 @@
     const marker = new google.maps.Marker({
       position: mapLatLang,
       map,
-      title: get(langDataStore)?.place_only || 'place_only',
+      title: lang?.place_only || 'place_only',
     })
 
     // @ts-ignore
     const infowindow = new google.maps.InfoWindow({
-      content: buildInfoWindowContent(),
+      content: buildInfoWindowContent(lang),
       position: mapLatLang
     })
     infowindow.open(map)

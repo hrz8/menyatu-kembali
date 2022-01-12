@@ -6,6 +6,7 @@ import { writable, get } from 'svelte/store'
 
 export const isGroupValid = writable([-1, false])
 export const isDebugValid = writable(false)
+export const sessionIds = writable([null, null])
 
 export const fetchData = async () => {
   const debug = (new URLSearchParams(window.location.search)).get('debug') === 'true'
@@ -15,6 +16,14 @@ export const fetchData = async () => {
 
   if (localStorage.getItem('g_code') && localStorage.getItem('g_sess')) {
     isGroupValid.set([Number(localStorage.getItem('g_sess')), true])
+  }
+
+  if (localStorage.getItem('e_sess')) {
+    const eventIds = JSON.parse(localStorage.getItem('e_sess'))
+    sessionIds.set([eventIds[0], eventIds[1]])
+  }
+
+  if ((localStorage.getItem('g_code') && localStorage.getItem('g_sess')) || localStorage.getItem('e_sess')) {
     return
   }
 
@@ -25,6 +34,12 @@ export const fetchData = async () => {
   let allowedGroup = []
   if (result?.sesi1 && result?.sesi2) {
     allowedGroup = [result.sesi1, result.sesi2]
+  }
+
+  if (result?.sesi1_event_id && result?.sesi2_event_id) {
+    const eventIds = [result.sesi1_event_id, result.sesi2_event_id]
+    sessionIds.set(eventIds)
+    localStorage.setItem('e_sess', JSON.stringify(eventIds))
   }
 
   const group = (new URLSearchParams(window.location.search)).get('g') || null
