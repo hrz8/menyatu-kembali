@@ -36,17 +36,17 @@ export const fetchData = async () => {
     allowedGroup = [result.sesi1, result.sesi2]
   }
 
-  if (result?.sesi1_event_id && result?.sesi2_event_id) {
-    const eventIds = [result.sesi1_event_id, result.sesi2_event_id]
-    sessionIds.set(eventIds)
-    localStorage.setItem('e_sess', JSON.stringify(eventIds))
-  }
-
   const group = (new URLSearchParams(window.location.search)).get('g') || null
   if (group && allowedGroup.includes(group)) {
     const groupSession = allowedGroup.findIndex((o) => o === group) + 1;
     isGroupValid.set([groupSession, true])
     localStorage.setItem('g_code', String(group))
     localStorage.setItem('g_sess', String(groupSession))
+  }
+
+  if (localStorage.getItem('g_sess') && result?.sesi1_event_id && result?.sesi2_event_id) {
+    const eventIds = [result.sesi1_event_id, result.sesi2_event_id]
+    sessionIds.set(eventIds)
+    localStorage.setItem('e_sess', JSON.stringify(eventIds))
   }
 }
