@@ -133,7 +133,7 @@
         <input
           type="text"
           minlength="3"
-          maxlength="100"
+          maxlength="256"
           class="form-control"
           disabled={sendingMessage || sentAlready}
           style="font-size: 14px;"
@@ -146,7 +146,7 @@
           disabled={sendingMessage || sentAlready}
           placeholder={$langDataStore?.section_gift_form_message || 'section_gift_form_message'}
           minlength="10"
-          maxlength="500"
+          maxlength="512"
           rows="5"
           style="font-size: 14px;"
           bind:value={messageTextarea}
@@ -158,7 +158,7 @@
           class="btn btn-urfa"
           disabled={sendingMessage || sentAlready}
           on:click|preventDefault={() => {
-            if (nameInput.length < 3) {
+            if (nameInput.length < 3 || nameInput.length > 256) {
               Swal.fire({
                 icon: 'error',
                 confirmButtonColor: '#c26522',
@@ -166,7 +166,7 @@
               })
               return
             }
-            if (messageTextarea.length < 10) {
+            if (messageTextarea.length < 5 || messageTextarea.length > 512) {
               Swal.fire({
                 icon: 'error',
                 confirmButtonColor: '#c26522',
