@@ -161,6 +161,14 @@
     const res = str.replace(replace, name)
     return res
   }
+
+  const parseMaybe = (value, replace) => {
+    if (JSON.parse(localStorage.getItem('cfmd'))?.[3] !== 'TENTATIVE') {
+      return value
+    }
+    const res = value.replace('{{maybe}}', replace)
+    return res
+  }
 </script>
 
 <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
@@ -181,7 +189,7 @@
               JSON.parse(localStorage.getItem('cfmd'))?.[0]
             )}</h5>
           {#if JSON.parse(localStorage.getItem('cfmd'))?.[3]}
-            <p>{parseLang(
+            <p>{parseMaybe(parseLang(
               $langDataStore,
               'thank_you_confirmed',
               '{{session}}',
@@ -192,7 +200,7 @@
                       : `${JSON.parse(localStorage.getItem('cfmd'))?.[4]}nd`
                   )
                 : JSON.parse(localStorage.getItem('cfmd'))?.[4]
-              )}</p>
+              ), localStorage.getItem('l') === 'en' ? ' maybe ' : ' mungkin ')}</p>
           {/if}
         {:else}
           <form>
