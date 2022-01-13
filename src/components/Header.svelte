@@ -20,6 +20,7 @@
           localStorage.removeItem('g_sess')
           localStorage.removeItem('m')
           localStorage.removeItem('cfmd')
+          localStorage.removeItem('e_sess')
         } catch (error) {
           // do nothing
         }
