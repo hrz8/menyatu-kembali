@@ -9,7 +9,7 @@
 </script>
 
 <div class="img-cover" style="background: url('/jumbotron-header.jpeg'); background-size: cover;">
-  <div class="img-cover" style="text-align: left; padding: 160px 30px; background-color: rgba(255,255,255,.35)">
+  <div class="img-cover" style="text-align: left; padding: 130px 30px; background-color: rgba(255,255,255,.35)">
     <img
       style="cursor: pointer; position: absolute; top: 30px; right: 30px"
       src="./{$langActiveStore}.png"
@@ -24,6 +24,15 @@
       class="locale-text bold-text"
       style="line-height: 1.5; font-size: 46px; color: #fff"
     >{$langDataStore?.cover_text_2 || 'cover_text_2'}</h1>
+    <small
+      class="locale-text bold-text fst-italic"
+      style="line-height: 1.5; color: #fff"
+    >{$langDataStore?.cover_text_3a || 'cover_text_3a'}</small>
+    <br />
+    <small
+      class="locale-text bold-text fst-italic"
+      style="line-height: 1.5; color: #fff"
+    >{$langDataStore?.cover_text_3b || 'cover_text_3b'}</small>
     <div style="margin-top: 30px;">
       <a
         href="#congrats"

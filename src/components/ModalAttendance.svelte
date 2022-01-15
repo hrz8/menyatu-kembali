@@ -175,7 +175,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="confirmModalLabel">{$langDataStore?.cover_button_confirm || 'place_only'}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          disabled={sendingCorfimation}
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body text-start">
         {#if sentAlready}
@@ -295,6 +301,7 @@
           type="button"
           class="btn btn-secondary"
           data-bs-dismiss="modal"
+          disabled={sendingCorfimation}
         >Close</button>
         <button
           type="submit"
