@@ -6,6 +6,7 @@
 
   import { data as langDataStore } from '../../stores/lang'
   import WishListModal from '../WishListModal.svelte'
+  import ModalPenny from '../ModalPenny.svelte';
   import relativeTime from 'dayjs/plugin/relativeTime'
   import {
     SPREADSHEET_RESPONSE_ID,
@@ -112,6 +113,8 @@
     type="button"
     class="bold-text btn btn-hirzi mb-3"
     style="display: block; width: 180px"
+    data-bs-toggle="modal"
+    data-bs-target="#pennyModal"
   >{$langDataStore?.section_gift_send_money || 'section_gift_send_money'}</button>
 
   <button
@@ -218,6 +221,7 @@
 </div>
 
 <WishListModal />
+<ModalPenny />
 
 <style>
 ::-webkit-scrollbar {
