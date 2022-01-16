@@ -5,7 +5,7 @@
   import Header from './components/Header.svelte'
   import Navbar from './components/Navbar.svelte'
   import Content from './components/Content.svelte'
-  import { initialFetchData as initialFetchDataLang } from './stores/lang'
+  import { initialFetchData as initialFetchDataLang, loading } from './stores/lang'
   import { isGroupValid, fetchData as fetchDataGroup, isDebugValid } from './stores/params'
 
   export let ready
@@ -33,7 +33,7 @@
 
 <Styles />
 
-{#if $isDebugValid || $isGroupValid[1]}
+{#if ($isDebugValid || $isGroupValid[1]) && $loading === false}
   <main style="background: url('/background-alt.png'); background-size: cover;">
     <div id="container-mk">
       <Header isDisplay={displayHeader} />

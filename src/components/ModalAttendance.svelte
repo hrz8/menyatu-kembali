@@ -183,7 +183,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body text-start">
+      <div class="modal-body text-start" style="max-height: 500px; overflow-y: auto;">
         {#if sentAlready}
           <h5
             class="bold-text mb-3"
@@ -305,6 +305,7 @@
           data-bs-dismiss="modal"
           disabled={sendingCorfimation}
         >Close</button>
+        {#if !sentAlready}
         <button
           type="submit"
           class="btn btn-urfa"
@@ -357,7 +358,24 @@
             sentAlready ?
               $langDataStore?.confirmation_label_placeholder_button_confirmed || 'confirmation_label_placeholder_button_confirmed' :
               $langDataStore?.confirmation_label_placeholder_button || 'confirmation_label_placeholder_button'}</button>
+        {/if}
       </div>
     </div>
   </div>
 </div>
+
+<style>
+::-webkit-scrollbar {
+  display: block !important;
+  width: 5px !important;
+}
+  
+::-webkit-scrollbar-thumb {
+  background: #f9c6a1 !important; 
+  border-radius: 10px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c26522 !important; 
+}
+</style>
