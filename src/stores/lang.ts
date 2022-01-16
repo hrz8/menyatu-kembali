@@ -37,6 +37,7 @@ export const initialFetchData = async () => {
   const result = localStorage.getItem(`l_${activeLanguage}`)
   if (result) {
     data.set(JSON.parse(result))
+    loading.set(false)
     return
   }
   try {
@@ -46,6 +47,7 @@ export const initialFetchData = async () => {
     console.error(error)
     data.set(null)
   } finally {
+    console.log("kadieu")
     loading.set(false)
   }
 }

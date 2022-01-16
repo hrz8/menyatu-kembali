@@ -1,4 +1,5 @@
 <script>
+  import { Modal } from 'bootstrap/dist/js/bootstrap.bundle.js'
   import Swal from 'sweetalert2'
 
   import { data as langDataStore } from '../stores/lang'
@@ -7,6 +8,10 @@
     SPREADSHEET_RESPONSE_ATTENDANCE_SHEET_NAME,
     SPREADSHEET_RESPONSE_ID
   } from '../config';
+  import { onDestroy, onMount } from 'svelte';
+
+  let isPersonAMountMore = false
+  let justConfirmed = false
 
   let sentAlready = false
   let isAttendOrMaybe = true
@@ -26,8 +31,16 @@
   let originInput = ''
   let isAttendInput = 0
   let sessionInput = null
-  let personAmountInput = 1
+  let personAmountInput;
   let sendingCorfimation = false
+
+  onMount(() => {
+    justConfirmed = false
+  })
+
+  onDestroy(() => {
+    justConfirmed = false
+  })
 
   sessionIdsStore.subscribe(val => {
     sessionInput = val[g_sess - 1]
@@ -63,27 +76,34 @@
     text: 'alert_send_confirmation_validation_personAmount'
   }
 
+  const swalValidationPersonAmountEmpty = {
+    title: 'alert_send_message_oops',
+    text: 'alert_send_confirmation_validation_personAmount_b'
+  }
+
   langDataStore.subscribe(val => {
     swal.title = val?.alert_send_message_title || 'alert_send_message_oops'
-    swal.text = val?.alert_send_message_text || 'alert_send_message_text'
+    swal.text = val?.alert_send_confirmation_text || 'alert_send_confirmation_text'
     swal.confirmButtonText = val?.alert_send_message_yes || 'alert_send_message_yes'
     swal.cancelButtonText = val?.alert_send_message_no || 'alert_send_message_no'
     swalValidationEmail.title = val?.alert_send_message_oops || 'alert_send_message_oops'
     swalValidationName.title = val?.alert_send_message_oops || 'alert_send_message_oops'
     swalValidationOrigin.title = val?.alert_send_message_oops || 'alert_send_message_oops'
     swalValidationPersonAmount.title = val?.alert_send_message_oops || 'alert_send_message_oops'
+    swalValidationPersonAmountEmpty.title = val?.alert_send_message_oops || 'alert_send_message_oops'
     swalValidationEmail.text = val?.alert_send_confirmation_validation_email || 'alert_send_confirmation_validation_email'
     swalValidationName.text = val?.alert_send_message_validation_name || 'alert_send_message_validation_name'
     swalValidationOrigin.text = val?.alert_send_confirmation_validation_origin || 'alert_send_confirmation_validation_origin'
     swalValidationPersonAmount.text = val?.alert_send_confirmation_validation_personAmount || 'alert_send_confirmation_validation_personAmount'
+    swalValidationPersonAmountEmpty.text = val?.alert_send_confirmation_validation_personAmount_b || 'alert_send_confirmation_validation_personAmount_b'
   })
 
   const mappingIsAttend = (isAttendInput) => {
     switch (isAttendInput) {
       case 0:
-        return 1
+        return 1 // YES
       case 1:
-        return 0
+        return 0 // NO
       case 2:
         return 'TENTATIVE'
       default:
@@ -130,10 +150,8 @@
         body: payload
       })
       const result = await response.json()
-      localStorage.setItem('cfmd', payload)
-      sentAlready = true
       if (emailInput.length) {
-        const responseCal = await fetch(
+        await fetch(
           `https://gopencalendar.herokuapp.com/send/${sessionInput}`, {
           method: 'POST',
           headers: {
@@ -144,14 +162,15 @@
             response: mappingIsAttendGoogleCalendar(mappingIsAttend(isAttendInput))
           })
         })
-        const resultCal = await responseCal.json()
-        return resultCal
       }
+      localStorage.setItem('cfmd', payload)
+      sentAlready = true
       return result
     } catch (error) {
       return null
     } finally {
       sendingCorfimation = false
+      justConfirmed = true
     }
   }
 
@@ -177,13 +196,14 @@
         <h5 class="modal-title" id="confirmModalLabel">{$langDataStore?.cover_button_confirm || 'place_only'}</h5>
         <button
           type="button"
+          on:click={() => justConfirmed = false}
           class="btn-close"
           data-bs-dismiss="modal"
           disabled={sendingCorfimation}
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body text-start">
+      <div class="modal-body text-start" style="max-height: 500px; overflow-y: auto;">
         {#if sentAlready}
           <h5
             class="bold-text mb-3"
@@ -196,7 +216,10 @@
           {#if JSON.parse(localStorage.getItem('cfmd'))?.[3]}
             <p>{parseMaybe(parseLang(
               $langDataStore,
-              'thank_you_confirmed',
+              justConfirmed ? (
+                mappingIsAttend(isAttendInput) === 'TENTATIVE' ?
+                  'thank_you_confirmed_just_maybe' : 'thank_you_confirmed_just'
+                ) : 'thank_you_confirmed',
               '{{session}}',
               localStorage.getItem('l') === 'en'
                 ? (
@@ -206,6 +229,8 @@
                   )
                 : JSON.parse(localStorage.getItem('cfmd'))?.[4]
               ), localStorage.getItem('l') === 'en' ? ' maybe ' : ' mungkin ')}</p>
+          {:else}
+            <p>{$langDataStore?.thank_you_confirmed_no || 'thank_you_confirmed_no'}</p>
           {/if}
         {:else}
           <form>
@@ -292,7 +317,19 @@
                   class="form-control"
                   disabled={sendingCorfimation || sentAlready}
                   style="font-size: 14px;"
+                  on:input={(e) => {
+                    // @ts-ignore
+                    const n = Number(e.target.value)
+                    if (n > 20) {
+                      isPersonAMountMore = true
+                    } else {
+                      isPersonAMountMore = false
+                    }
+                  }}
                   bind:value={personAmountInput}>
+                {#if isPersonAMountMore}
+                  <div id="personAmountHelp" class="form-text">max: 20</div>
+                {/if}
               </div>
             {/if}
           </form>
@@ -304,7 +341,9 @@
           class="btn btn-secondary"
           data-bs-dismiss="modal"
           disabled={sendingCorfimation}
-        >Close</button>
+          on:click={() => justConfirmed = false}
+        >{sentAlready ? 'OK' : 'Close'}</button>
+        {#if !sentAlready}
         <button
           type="submit"
           class="btn btn-urfa"
@@ -337,6 +376,14 @@
               })
               return
             }
+            if (mappingIsAttend(isAttendInput) !== 0 && (personAmountInput === null || personAmountInput === undefined)) {
+              Swal.fire({
+                icon: 'error',
+                confirmButtonColor: '#c26522',
+                ...swalValidationPersonAmountEmpty
+              })
+              return
+            }
             if (isAttendOrMaybe && (personAmountInput < 1 || personAmountInput > 20)) {
               Swal.fire({
                 icon: 'error',
@@ -353,11 +400,28 @@
               })
           }}
         >{sendingCorfimation ?
-          'Confirming...' :
+          $langDataStore?.confirming_status || 'confirming_status' :
             sentAlready ?
               $langDataStore?.confirmation_label_placeholder_button_confirmed || 'confirmation_label_placeholder_button_confirmed' :
               $langDataStore?.confirmation_label_placeholder_button || 'confirmation_label_placeholder_button'}</button>
+        {/if}
       </div>
     </div>
   </div>
 </div>
+
+<style>
+::-webkit-scrollbar {
+  display: block !important;
+  width: 5px !important;
+}
+  
+::-webkit-scrollbar-thumb {
+  background: #f9c6a1 !important; 
+  border-radius: 10px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c26522 !important; 
+}
+</style>
