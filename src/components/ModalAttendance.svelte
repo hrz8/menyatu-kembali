@@ -8,6 +8,8 @@
     SPREADSHEET_RESPONSE_ID
   } from '../config';
 
+  let isPersonAMountMore = false
+
   let sentAlready = false
   let isAttendOrMaybe = true
 
@@ -26,7 +28,7 @@
   let originInput = ''
   let isAttendInput = 0
   let sessionInput = null
-  let personAmountInput = 1
+  let personAmountInput;
   let sendingCorfimation = false
 
   sessionIdsStore.subscribe(val => {
@@ -292,7 +294,19 @@
                   class="form-control"
                   disabled={sendingCorfimation || sentAlready}
                   style="font-size: 14px;"
+                  on:input={(e) => {
+                    // @ts-ignore
+                    const n = Number(e.target.value)
+                    if (n > 20) {
+                      isPersonAMountMore = true
+                    } else {
+                      isPersonAMountMore = false
+                    }
+                  }}
                   bind:value={personAmountInput}>
+                {#if isPersonAMountMore}
+                  <div id="personAmountHelp" class="form-text">max: 20</div>
+                {/if}
               </div>
             {/if}
           </form>
