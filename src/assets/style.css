@@ -56,7 +56,7 @@ body {
   display: none;
 }
 
-button:focus,
+button:not([data-bs-target="#carouselPlace"]):focus,
 a:focus,
 textarea:focus,
 select:focus,

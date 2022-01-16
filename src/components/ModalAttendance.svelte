@@ -16,6 +16,8 @@
   let sentAlready = false
   let isAttendOrMaybe = true
 
+  let amountError = 'max: 20'
+
   const spreadsheetUrl = `https://opensheet.herokuapp.com/${SPREADSHEET_RESPONSE_ID}/${SPREADSHEET_RESPONSE_ATTENDANCE_SHEET_NAME}`
 
   $: {
@@ -195,6 +197,7 @@
       <div class="modal-header">
         <h5 class="modal-title" id="confirmModalLabel">{$langDataStore?.cover_button_confirm || 'place_only'}</h5>
         <button
+          id="closeConfirmModal"
           type="button"
           on:click={() => justConfirmed = false}
           class="btn-close"
@@ -322,13 +325,17 @@
                     const n = Number(e.target.value)
                     if (n > 20) {
                       isPersonAMountMore = true
+                      amountError = 'max: 20'
+                    } else if (n < 1) {
+                      isPersonAMountMore = true
+                      amountError = 'min: 1'
                     } else {
                       isPersonAMountMore = false
                     }
                   }}
                   bind:value={personAmountInput}>
                 {#if isPersonAMountMore}
-                  <div id="personAmountHelp" class="form-text">max: 20</div>
+                  <div id="personAmountHelp" class="form-text">{amountError}</div>
                 {/if}
               </div>
             {/if}
@@ -336,6 +343,26 @@
         {/if}
       </div>
       <div class="modal-footer">
+        {#if sentAlready && !sendingCorfimation}
+          <button
+            type="button"
+            class="btn btn-hirzi"
+            on:click={() => {
+              document.getElementById('closeConfirmModal').click()
+              window.location.hash = ""
+              setTimeout(() => window.location.hash = "#congrats", 500)
+            }}
+          >{$langDataStore?.cover_button_congrats || 'cover_button_congrats'}</button>
+          <button
+            type="button"
+            class="btn btn-urfa"
+            on:click={() => {
+              document.getElementById('closeConfirmModal').click()
+              window.location.hash = ""
+              setTimeout(() => window.location.hash = "#gift", 500)
+            }}
+          >{$langDataStore?.cover_button_gift || 'cover_button_gift'}</button>
+        {/if}
         <button
           type="button"
           class="btn btn-secondary"
@@ -376,7 +403,7 @@
               })
               return
             }
-            if (mappingIsAttend(isAttendInput) !== 0 && (personAmountInput === null || personAmountInput === undefined)) {
+            if (isAttendOrMaybe && (personAmountInput < 1 || personAmountInput === null || personAmountInput === undefined)) {
               Swal.fire({
                 icon: 'error',
                 confirmButtonColor: '#c26522',
@@ -384,7 +411,7 @@
               })
               return
             }
-            if (isAttendOrMaybe && (personAmountInput < 1 || personAmountInput > 20)) {
+            if (isAttendOrMaybe && (personAmountInput > 20)) {
               Swal.fire({
                 icon: 'error',
                 confirmButtonColor: '#c26522',
