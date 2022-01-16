@@ -39,12 +39,11 @@
         type="button"
         class="btn btn-hirzi"
       >{$langDataStore?.cover_button_congrats || 'cover_button_congrats'}</a>
-      <button
+      <a
         type="button"
         class="btn btn-urfa"
-        data-bs-toggle="modal"
-        data-bs-target="#giftModal"
-      >{$langDataStore?.cover_button_gift || 'cover_button_gift'}</button>
+        href="#gift"
+      >{$langDataStore?.cover_button_gift || 'cover_button_gift'}</a>
       <button
         type="button"
         class="btn btn-urfa mt-3"

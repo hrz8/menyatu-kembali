@@ -6,26 +6,39 @@
   const numbers = [
     {
       provider: 'BCA',
-      no: '088292901010',
+      no: '0920132383',
       name: 'Hirzi Nurfakhrian',
       img: '/payment-bca.png'
+    },
+    {
+      provider: 'mandiri',
+      no: '1660003183688',
+      name: 'Hirzi Nurfakhrian',
+      img: '/payment-mandiri.png'
+    },
+    {
+      provider: 'BNI',
+      no: '0906572673',
+      name: 'Hirzi Nurfakhrian',
+      img: '/payment-bni.png'
+    },
+    {
+      provider: 'Bank Muamalat',
+      name: 'Urfa Aliya Hakim',
+      no: '1110007208',
+      img: '/payment-muamalat.png'
     },
     {
       provider: 'OVO',
-      no: '083116823235',
-      name: 'Hirzi Nurfakhrian',
-      img: '/payment-bca.png'
+      name: 'Urfa Aliya Hakim',
+      no: '081902857128',
+      img: '/payment-ovo.png'
     },
     {
-      provider: 'GoPay',
-      no: '083116823235',
-      name: 'Hirzi Nurfakhrian',
-      img: '/payment-bca.png'
-    },
-    {
-      provider: 'Jenius',
-      name: 'Hirzi Nurfakhrian',
-      no: '083116823235',
+      provider: 'gopay',
+      name: 'Urfa Aliya Hakim',
+      no: '081902857128',
+      img: '/payment-gopay.png'
     }
   ]
 
@@ -49,22 +62,22 @@
         <h5 class="modal-title" id="pennyModalLabel">{$langDataStore?.section_gift_send_money || 'section_gift_send_money'}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
         {#each numbers as rek, i}
           <div class="card mb-3" style="width: 70%; margin: auto;">
             {#if rek.img}
-              <img src={rek.img} class="card-img-top img-fluid" alt="ovo qr">
+              <img src={rek.img} class="card-img-top img-fluid p-3" alt="ovo qr">
             {/if}
             <div class="card-body">
-              <h5 class="card-title">{rek.provider}</h5>
-              <p class="card-text">a/n {rek.name}</p>
+              <h3 class="card-title">{rek.provider}</h3>
+              <p class="card-text">a/n <strong>{rek.name}</strong></p>
               <p class="card-text">{rek.no}</p>
               <div class="d-grid gap-2">
                 <button
                   id={`rek-${i}`}
                   on:click={() => onBCAClick(i)}
                   class="btn btn-hirzi btn-block"
-                ><Subtract /> Copy</button>
+                ><Subtract /> {$langDataStore?.copy_account_number || 'copy_account_number'}</button>
               </div>
             </div>
           </div>
@@ -76,3 +89,19 @@
     </div>
   </div>
 </div>
+
+<style>
+::-webkit-scrollbar {
+  display: block !important;
+  width: 10px !important;
+}
+  
+::-webkit-scrollbar-thumb {
+  background: #f9c6a1 !important; 
+  border-radius: 10px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c26522 !important; 
+}
+</style>

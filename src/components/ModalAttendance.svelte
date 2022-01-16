@@ -228,8 +228,10 @@
                 minlength="3"
                 class="form-control"
                 disabled={sendingCorfimation || sentAlready}
+                aria-describedby="originHelp"
                 style="font-size: 14px;"
                 bind:value={originInput}>
+              <div id="originHelp" class="form-text">{$langDataStore?.confirm_placeholder_origin_help || 'confirm_placeholder_origin_help'}</div>
             </div>
             <div class="mb-3">
               <label
@@ -278,7 +280,7 @@
                   style="font-size: 14px;"
                   aria-describedby="emailHelp"
                   bind:value={emailInput}>
-                  <div id="emailHelp" class="form-text">{$langDataStore?.confirm_placeholder_email_help || 'confirm_placeholder_email_help'}</div>
+                <div id="emailHelp" class="form-text">{$langDataStore?.confirm_placeholder_email_help || 'confirm_placeholder_email_help'}</div>
               </div>
               <div class="mb-3">
                 <label for="personAmountInput" class="form-label">{$langDataStore?.confirmation_placeholder_person_amount || 'confirmation_placeholder_person_amount'}</label>

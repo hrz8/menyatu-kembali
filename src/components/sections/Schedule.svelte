@@ -5,7 +5,7 @@
   import ModalAttendance from '../ModalAttendance.svelte'
 </script>
 
-<div class="schedule" style="text-align: left; background: url('/background-cropped.jpeg'); background-size: cover;">
+<div class="schedule" style="text-align: left;">
   <p
     class="locale-text bold-text primary-text"
     style="font-size: 20px;"
@@ -70,11 +70,10 @@
 
 <style>
   .schedule {
-    box-shadow: 0 0 48px 0 rgb(0 0 0 / 30%);
     max-width: 400px;
     height: 100%;
     padding: 55px 20px;
-    background: #fff;
+    padding-bottom: 10px;
   }
 
   .suggestion-snippet {

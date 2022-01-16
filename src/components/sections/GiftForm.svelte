@@ -99,7 +99,7 @@
   }
 </script>
 
-<div style="padding: 55px 35px; padding-bottom: 30px; text-align: left;">
+<div style="padding: 0px 35px; padding-top: 55px; padding-bottom: 30px; text-align: left;">
   <p
     class="locale-text bold-text primary-text"
     style="font-size: 20px;"
@@ -111,7 +111,7 @@
 
   <button
     type="button"
-    class="bold-text btn btn-hirzi mb-3"
+    class="btn btn-hirzi mb-3"
     style="display: block; width: 180px"
     data-bs-toggle="modal"
     data-bs-target="#pennyModal"
@@ -119,7 +119,7 @@
 
   <button
     type="button"
-    class="bold-text btn btn-urfa mb-5"
+    class="btn btn-urfa mb-5"
     style="display: block; width: 180px"
     data-bs-toggle="modal"
     data-bs-target="#giftModal"

@@ -6,7 +6,7 @@
   import MapModal from '../MapModal.svelte'
 </script>
 
-<div style="text-align: left; padding: 55px 30px">
+<div style="text-align: left; padding: 55px 30px; padding-bottom: 10px;">
   <p
     class="locale-text primary-text bold-text mb-0"
     style="font-size: 20px;"
@@ -25,7 +25,7 @@
   </div>
   <div class="mt-4 d-flex justify-content-center">
     <button
-      class="btn btn-hirzi bold-text"
+      class="btn btn-hirzi"
       style="box-shadow: 0 0 30px 0 rgb(0 0 0 / 15%); border: 1px solid #c26522"
       data-bs-toggle="modal"
       data-bs-target="#mapModal">
