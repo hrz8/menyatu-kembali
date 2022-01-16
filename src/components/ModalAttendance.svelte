@@ -1,4 +1,5 @@
 <script>
+  import { Modal } from 'bootstrap/dist/js/bootstrap.bundle.js'
   import Swal from 'sweetalert2'
 
   import { data as langDataStore } from '../stores/lang'
@@ -7,7 +8,7 @@
     SPREADSHEET_RESPONSE_ATTENDANCE_SHEET_NAME,
     SPREADSHEET_RESPONSE_ID
   } from '../config';
-import { onDestroy, onMount } from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
 
   let isPersonAMountMore = false
   let justConfirmed = false
@@ -100,9 +101,9 @@ import { onDestroy, onMount } from 'svelte';
   const mappingIsAttend = (isAttendInput) => {
     switch (isAttendInput) {
       case 0:
-        return 1
+        return 1 // YES
       case 1:
-        return 0
+        return 0 // NO
       case 2:
         return 'TENTATIVE'
       default:
@@ -228,6 +229,8 @@ import { onDestroy, onMount } from 'svelte';
                   )
                 : JSON.parse(localStorage.getItem('cfmd'))?.[4]
               ), localStorage.getItem('l') === 'en' ? ' maybe ' : ' mungkin ')}</p>
+          {:else}
+            <p>{$langDataStore?.thank_you_confirmed_no || 'thank_you_confirmed_no'}</p>
           {/if}
         {:else}
           <form>
@@ -373,7 +376,7 @@ import { onDestroy, onMount } from 'svelte';
               })
               return
             }
-            if (personAmountInput === null || personAmountInput === undefined) {
+            if (mappingIsAttend(isAttendInput) !== 0 && (personAmountInput === null || personAmountInput === undefined)) {
               Swal.fire({
                 icon: 'error',
                 confirmButtonColor: '#c26522',
