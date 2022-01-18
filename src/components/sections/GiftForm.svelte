@@ -101,7 +101,7 @@
   }
 </script>
 
-<div style="padding: 0px 35px; padding-top: 55px; padding-bottom: 30px; text-align: left;">
+<div style={`padding: 0px 35px; ${showGift ? 'padding-top: 55px;' : 'padding-top: 40px;'} padding-bottom: 30px; text-align: left;`}>
   {#if showGift}
     <p
       class="locale-text bold-text primary-text"
@@ -231,7 +231,7 @@
   display: block !important;
   width: 5px !important;
 }
- 
+
 ::-webkit-scrollbar-thumb {
   background: #f9c6a1 !important; 
   border-radius: 10px !important;

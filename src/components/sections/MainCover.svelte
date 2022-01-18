@@ -48,6 +48,7 @@
         href="#gift"
       >{$langDataStore?.cover_button_gift || 'cover_button_gift'}</a>
       {/if}
+      <br />
       <button
         type="button"
         class="btn btn-urfa mt-3"
