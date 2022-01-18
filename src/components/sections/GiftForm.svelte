@@ -13,6 +13,8 @@
     SPREADSHEET_RESPONSE_MESSAGE_SHEET_NAME
   } from '../../config';
 
+  const showGift = new URLSearchParams(window.location.search).get('o') === null
+
   dayjs.extend(relativeTime)
 
   const spreadsheetUrl = `https://opensheet.herokuapp.com/${SPREADSHEET_RESPONSE_ID}/${SPREADSHEET_RESPONSE_MESSAGE_SHEET_NAME}`
@@ -100,31 +102,32 @@
 </script>
 
 <div style="padding: 0px 35px; padding-top: 55px; padding-bottom: 30px; text-align: left;">
-  <p
-    class="locale-text bold-text primary-text"
-    style="font-size: 20px;"
-  >{$langDataStore?.section_gift_note || 'section_gift_note'}</p>
-  <p
-    class="mb-4 locale-text primary-text"
-    style="font-size: 16px;"
-  >{$langDataStore?.section_gift_description || 'section_gift_description'}</p>
+  {#if showGift}
+    <p
+      class="locale-text bold-text primary-text"
+      style="font-size: 20px;"
+    >{$langDataStore?.section_gift_note || 'section_gift_note'}</p>
+    <p
+      class="mb-4 locale-text primary-text"
+      style="font-size: 16px;"
+    >{$langDataStore?.section_gift_description || 'section_gift_description'}</p>
 
-  <button
-    type="button"
-    class="btn btn-hirzi mb-3"
-    style="display: block; width: 180px"
-    data-bs-toggle="modal"
-    data-bs-target="#pennyModal"
-  >{$langDataStore?.section_gift_send_money || 'section_gift_send_money'}</button>
+    <button
+      type="button"
+      class="btn btn-hirzi mb-3"
+      style="display: block; width: 180px"
+      data-bs-toggle="modal"
+      data-bs-target="#pennyModal"
+    >{$langDataStore?.section_gift_send_money || 'section_gift_send_money'}</button>
 
-  <button
-    type="button"
-    class="btn btn-urfa mb-5"
-    style="display: block; width: 180px"
-    data-bs-toggle="modal"
-    data-bs-target="#giftModal"
-  >{$langDataStore?.section_gift_send_gift || 'section_gift_send_gift'}</button>
-
+    <button
+      type="button"
+      class="btn btn-urfa mb-5"
+      style="display: block; width: 180px"
+      data-bs-toggle="modal"
+      data-bs-target="#giftModal"
+    >{$langDataStore?.section_gift_send_gift || 'section_gift_send_gift'}</button>
+  {/if}
   <div id="congrats">
     <p
       class="locale-text bold-text primary-text"

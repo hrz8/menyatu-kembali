@@ -6,6 +6,8 @@
   } from '../../stores/lang'
   import ModalAttendance from '../ModalAttendance.svelte';
   import WishListModal from '../WishListModal.svelte';
+
+  const showGift = new URLSearchParams(window.location.search).get('o') === null
 </script>
 
 <div class="img-cover" style="background: url('/jumbotron-header.jpeg'); background-size: cover;">
@@ -39,11 +41,13 @@
         type="button"
         class="btn btn-hirzi"
       >{$langDataStore?.cover_button_congrats || 'cover_button_congrats'}</a>
+      {#if showGift}
       <a
         type="button"
         class="btn btn-urfa"
         href="#gift"
       >{$langDataStore?.cover_button_gift || 'cover_button_gift'}</a>
+      {/if}
       <button
         type="button"
         class="btn btn-urfa mt-3"
