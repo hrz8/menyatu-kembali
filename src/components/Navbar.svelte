@@ -1,5 +1,6 @@
 <script>
-  import { House, PinMapFill, Watch, Gift } from 'svelte-bootstrap-icons'
+  import { House, PinMapFill, Watch, Gift, ChatQuote } from 'svelte-bootstrap-icons'
+  const showGift = new URLSearchParams(window.location.search).get('o') === null
 </script>
 
 <div class="nav-wrapper">
@@ -7,7 +8,13 @@
     <a class="text-decoration-none" href="#home"><House width="24" height="24" /></a>
     <a class="text-decoration-none" href="#location"><PinMapFill width="24" height="24" /></a>
     <a class="text-decoration-none" href="#schedule"><Watch width="24" height="24" /></a>
-    <a class="text-decoration-none" href="#gift"><Gift width="24" height="24" /></a>
+    <a class="text-decoration-none" href="#gift">
+      {#if showGift}
+        <Gift width="24" height="24" />
+      {:else}
+        <ChatQuote width="24" height="24" />
+      {/if}
+    </a>
   </nav>
 </div>
 
