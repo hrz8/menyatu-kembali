@@ -28,7 +28,7 @@
       }}><ArrowRepeat width="18" height="18" /></button>
     {/if}
     <div
-      class="mx-3 primary-text bold-text"
+      class="mx-3 bold-text"
       style="color: rgb(104, 135, 154) !important;"
     >{$langDataStore?.cover_text_2 || 'cover_text_2'}</div>
     <img
