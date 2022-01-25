@@ -9,7 +9,10 @@ body {
 }
 
 .primary-text {
-  /* color: #304653 !important; */
+  color: #304653 !important;
+}
+
+.primary-text-outside {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-image: url('/primary-color.png') !important;

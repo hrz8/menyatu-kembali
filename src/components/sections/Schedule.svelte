@@ -7,7 +7,7 @@
 
 <div class="schedule" style="text-align: left;">
   <p
-    class="locale-text bold-text primary-text"
+    class="locale-text bold-text primary-text-outside"
     style="font-size: 20px;"
   >{$langDataStore?.section_schedule_note || 'section_schedule_note'}</p>
 

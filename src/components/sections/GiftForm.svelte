@@ -104,11 +104,11 @@
 <div style={`padding: 0px 35px; ${showGift ? 'padding-top: 55px;' : 'padding-top: 40px;'} padding-bottom: 30px; text-align: left;`}>
   {#if showGift}
     <p
-      class="locale-text bold-text primary-text"
+      class="locale-text bold-text primary-text-outside"
       style="font-size: 20px;"
     >{$langDataStore?.section_gift_note || 'section_gift_note'}</p>
     <p
-      class="mb-4 locale-text primary-text"
+      class="mb-4 locale-text primary-text-outside"
       style="font-size: 16px;"
     >{$langDataStore?.section_gift_description || 'section_gift_description'}</p>
 
@@ -130,7 +130,7 @@
   {/if}
   <div id="congrats">
     <p
-      class="locale-text bold-text primary-text"
+      class="locale-text bold-text primary-text-outside"
       style="font-size: 20px;"
     >{$langDataStore?.section_gift_form_title || 'section_gift_form_title'}</p>
 

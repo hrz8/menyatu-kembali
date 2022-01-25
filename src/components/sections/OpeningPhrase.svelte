@@ -8,16 +8,16 @@
 
 <div style="text-align: left; padding: 55px 30px; padding-bottom: 10px;">
   <p
-    class="locale-text primary-text bold-text mb-0"
+    class="locale-text primary-text-outside bold-text mb-0"
     style="font-size: 20px;"
   >{$langDataStore?.section_date_note || 'section_date_note'}</p>
   <DateCard />
   <p
-    class="mb-4 locale-text primary-text"
+    class="mb-4 locale-text primary-text-outside"
     style="font-size: 16px;"
   >{$langDataStore?.section_date_additional_note || 'section_date_additional_note'}</p>
   <p
-    class="locale-text primary-text bold-text"
+    class="locale-text primary-text-outside bold-text"
     style="font-size: 20px;"
   >{$langDataStore?.section_date_place || 'section_date_place'}</p>
   <div class="py-2 px-4">

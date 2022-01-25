@@ -10,7 +10,7 @@
     <span class="primary-text primary-box box inner-box">
       {$langDataStore?.section_date_date[1] || 'section_date_date'}
     </span>
-    <span class="inner-box"  style="padding: 0 3px;">
+    <span class="inner-box primary-text-outside" style="padding: 0 3px;">
       /
     </span>
     <span class="primary-text primary-box box inner-box">
@@ -19,7 +19,7 @@
     <span class="primary-text primary-box box inner-box">
       {$langDataStore?.section_date_month[1] || 'section_date_month'}
     </span>
-    <span class="inner-box" style="padding: 0 3px;">
+    <span class="inner-box primary-text-outside" style="padding: 0 3px;">
       /
     </span>
     <span class="primary-text primary-box box inner-box">
