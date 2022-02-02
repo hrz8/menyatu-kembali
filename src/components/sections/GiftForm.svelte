@@ -209,7 +209,7 @@
               <figure style="border-bottom: 1px dashed #c26522;">
                 <blockquote class="blockquote mb-4" style="font-size: 16px;">
                   <Quote width=24 height=24 />
-                  <p style="padding-left: 12px;">{message.message}</p>
+                  <p style="padding-left: 12px; white-space: pre-line;">{message.message}</p>
                 </blockquote>
                 <figcaption class="blockquote-footer" style="font-size: 12px; font-weight: 600;">
                   {message.name}<cite title="time ago"> - {dayjs().to(dayjs(message.submittedAtUTC))}</cite>
