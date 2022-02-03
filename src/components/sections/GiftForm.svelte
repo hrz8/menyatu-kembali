@@ -195,7 +195,7 @@
       </div>
     </form>
 
-    <div class="card shadow p-2 my-3 bg-body rounded" style="max-height: 300px; overflow-y: auto;">
+    <div class="card shadow p-2 my-3 bg-body rounded" style="max-height: 400px; overflow-y: auto;">
       <div class="card-body">
         {#await fetchMessages()}
           <div class="d-flex justify-content-center align-items-center">
